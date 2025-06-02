@@ -1,0 +1,34 @@
+.company-info-box {
+    position: fixed;
+    top: 110px; /* adjust depending on header height */
+    right: 50px;
+    width: 220px;
+    background-color: #003366;
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 1050;
+    opacity: 0.9;
+    font-family: 'Anton', sans-serif;
+}
+
+.company-info-box h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: 'Anton', sans-serif;
+    color: #aad8ff;
+}
+
+.company-info-box a {
+    color: #aad8ff;
+    text-decoration: none;
+}
+
+.company-info-box a:hover {
+    text-decoration: underline;
+}
+
+

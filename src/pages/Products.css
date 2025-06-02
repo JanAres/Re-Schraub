@@ -1,0 +1,161 @@
+/* src/pages/Products.css */
+
+/* ==========================================================
+   1) ENTIRE PRODUCT PAGE: stack 10–20 background images
+   ========================================================== */
+
+
+.full-width-banner {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    height: 400px;
+    background-image: url("src/img/Background.JPG");
+    background-size: cover;
+    background-position: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    z-index: 0;
+    position: relative;
+}
+
+.product {
+    /* multiple background images (replace with your own URLs) */
+    /* ensure each covers and is centered */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* a light overlay if you want (optional) */
+    background-color: #faf8f8; /* fallback / overlay if images fail */
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+/* ==========================================================
+   2) MAIN LAYOUT CONTAINER
+   ========================================================== */
+.products-layout {
+    display: flex;
+    max-width: 1200px;
+    justify-content: center; /* center the content horizontally */
+    margin: 40px auto;
+    padding: 20px;
+    gap: 30px;
+}
+
+/* ==========================================================
+   3) PRODUCT CONTENT (including heading, buttons, PDF)
+   ========================================================== */
+.product-content {
+    flex: 1;
+    font-family: "Anton", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    position: relative;
+    /* ensure any children with z-index > 1 float above background */
+}
+
+/* standard heading styles */
+.product-content .h1,
+.product-content h1 {
+    font-family: "Anton", sans-serif;
+}
+
+/* ==========================================================
+   4) PRODUCT OPTIONEN BUTTON BAR (horizontal)
+   ========================================================== */
+.produkt-buttons {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent buttons from wrapping to a new line */
+    justify-content: space-between; /* Spread buttons from left to right */
+    gap: 10px; /* Remove any additional spacing between buttons */
+    margin: 20px 0;
+    position: relative;
+    z-index: 2; /* Sit above background images */
+    margin-top: 100px;
+}
+
+/* all buttons share a similar style */
+.produkt-buttons button {
+
+    width: 210px;
+    height: 50px;
+    flex: 1;
+    color: #000000;
+    font-family: "Anton", sans-serif;
+    font-weight: 500;
+    padding: 10px 10px;
+    border: none;
+    font-size: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    background-color: #e0efff;
+    border-bottom: 5px solid #000b88;
+}
+
+
+.produkt-buttons button:hover {
+    background-color: #eef2ff;
+}
+
+/* ==========================================================
+   5) PDF VIEWER (hidden until a button click)
+   ========================================================== */
+.pdf-viewer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-button {
+    background-color: #005fa3;
+    color: #ffffff;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* wrapper around the actual PDF canvas */
+.pdf-wrapper {
+    flex: 1;
+    max-width: 800px; /* adjust if you want narrower/wider */
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    background: #ffffff;
+    pointer-events: none; /* keep PDF itself unclickable */
+}
+
+/* page indicator text */
+.page-indicator {
+    font-family: "Anton", sans-serif;
+    margin-top: 8px;
+}
+
+/* ==========================================================
+   6) RESPONSIVE: STACK VERTICALLY ON SMALLER SCREENS
+   ========================================================== */
+@media (max-width: 768px) {
+    .products-layout {
+        flex-direction: column;
+    }
+
+    .produkt-buttons {
+        justify-content: center;
+    }
+}

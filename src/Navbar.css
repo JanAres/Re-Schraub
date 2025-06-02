@@ -1,0 +1,40 @@
+/* src/components/Navbar.css */
+
+/* 1) INLINE-FLEX Container, passt genau zur Breite der Buttons */
+.navbar {
+    display: inline-flex;        /* Shrink to fit die Buttons */
+    background: #fdfdfd;
+    padding: 20px;               /* Oben/unten 20px, links/rechts 20px */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 5px solid #00028f;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+/* Da .header { display: flex; align-items: center; }
+   ist, zentriert sich die Inline-Flex-Navbar automatisch horizontal. */
+
+/* 2) UL bleibt ein Flex-Container, damit die LI nebeneinander stehen */
+.navbar .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 80px;             /* Abstand zwischen den einzelnen Links */
+    margin: 0;
+    padding: 0;
+}
+
+/* 3) Link-Styling: größere Schrift und größere Klickflächen */
+.navbar .nav-list li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 32px;                /* Größere Schrift */
+    font-family: "Anton", sans-serif;
+    padding: 12px 16px;             /* Vertikal 12px, Horizontal 16px */
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar .nav-list li a:hover {
+    color: #0055a5;
+    transform: scale(1.1);
+}
