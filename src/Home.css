@@ -20,6 +20,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     margin-bottom: 10px;
+    margin-top: 100px;
     font-size: 25px;
     border-bottom: 5px solid #000000;
     text-align: left;
@@ -61,7 +62,7 @@
 .box-img {
     width: 100%; /* Ensure the image takes up full box space */
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Keeps aspect ratio and fully covers the box area */
     display: block; /* Forces it to act as a block element */
     transition: opacity 0.6s ease-in-out; /* Smooth transition for image changes */
 }
@@ -75,10 +76,15 @@
     background-position: center;
     margin-top: 20px;
     margin-bottom: 60px;
-    position: relative;
+    position: relative; /* Required for child absolute positioning */
     z-index: 0;
 }
 
+
+
+.head-row .h3 {
+    font-size: 40px;
+}
 /* Banner Text Inside the Banner */
 .head-row {
     position: absolute;
@@ -88,8 +94,9 @@
     z-index: 2;
     padding: 20px;
     font-family: 'Anton', sans-serif;
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
+    margin-top: 180px;
     color: #000000;
     background-color: rgba(255, 255, 255, 0.85); /* White semi-transparent background */
     text-align: center;
