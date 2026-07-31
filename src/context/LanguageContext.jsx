@@ -30,8 +30,7 @@ export const LanguageProvider = ({ children }) => {
             }
         }
 
-        // Wenn text == null, Key nicht gefunden → gebe den Key zurück.
-        // Ansonsten, egal ob String, Array oder Objekt: gib text zurück.
+
         if (text === null) {
             return key;
         }

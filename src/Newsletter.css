@@ -1,0 +1,1523 @@
+/* Newsletter Page — clean white split layout */
+
+.newsletter-page {
+    position: relative;
+    min-height: calc(100vh - 90px);
+    padding: clamp(28px, 4vh, 44px) 20px clamp(56px, 7vh, 88px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #ffffff;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.newsletter-page .page-fly-title {
+    top: clamp(28px, 4vh, 46px);
+    z-index: 90;
+}
+
+.newsletter-header {
+    position: relative;
+    z-index: 16;
+    width: min(920px, 100%);
+    margin: 0 auto;
+    padding-top: clamp(92px, 13vh, 140px);
+    text-align: center;
+}
+
+.newsletter-header h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.newsletter-lead {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #263d52;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.55;
+    font-weight: 650;
+}
+
+.newsletter-stage {
+    position: relative;
+    width: min(1540px, 98vw);
+    min-height: clamp(690px, 76vh, 880px);
+    margin: clamp(18px, 3vh, 34px) auto 0;
+    display: grid;
+    place-items: start center;
+    isolation: isolate;
+    overflow: visible;
+}
+
+.newsletter-catalog-split {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.newsletter-catalog-img {
+    position: absolute;
+    top: 72px;
+    width: clamp(330px, 24vw, 445px);
+    height: clamp(470px, 42vw, 620px);
+    overflow: hidden;
+    border-radius: 30px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 87, 152, 0.1);
+    box-shadow:
+            0 34px 86px rgba(0, 42, 74, 0.16),
+            0 0 0 1px rgba(255, 255, 255, 0.88);
+    opacity: 0.94;
+    will-change: transform, opacity, filter;
+}
+
+.newsletter-catalog-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.newsletter-catalog-img--left {
+    left: clamp(16px, calc(50% - 760px), 130px);
+    transform: rotate(-8deg);
+    transform-origin: center;
+}
+
+.newsletter-catalog-img--right {
+    right: clamp(16px, calc(50% - 760px), 130px);
+    transform: rotate(8deg);
+    transform-origin: center;
+}
+
+/* Formular ist nur Layout, kein sichtbarer Container */
+.newsletter-form-card {
+    position: relative;
+    z-index: 20;
+    width: min(980px, calc(100vw - 58px));
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.newsletter-field-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(22px, 2.8vw, 42px);
+}
+
+.newsletter-field-row--small-first {
+    grid-template-columns: 0.82fr 1.18fr;
+}
+
+.newsletter-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newsletter-field label {
+    margin: 14px 0 8px;
+    padding-left: 8px;
+    color: #12324a;
+    font-size: 13px;
+    font-weight: 950;
+    letter-spacing: -0.01em;
+}
+
+.newsletter-field label span {
+    color: #708594;
+    font-weight: 780;
+}
+
+.newsletter-field input,
+.newsletter-field select {
+    width: 100%;
+    min-height: 60px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 87, 152, 0.2);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #101923;
+    caret-color: #101923;
+    font-size: 16px;
+    font-weight: 720;
+    padding: 17px 25px;
+    outline: none;
+    box-shadow:
+            0 15px 34px rgba(8, 36, 66, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px) saturate(1.05);
+    -webkit-backdrop-filter: blur(12px) saturate(1.05);
+    transition:
+            color 0.18s ease,
+            border-color 0.18s ease,
+            box-shadow 0.18s ease,
+            background 0.18s ease,
+            transform 0.18s ease;
+}
+
+/* Beim Tippen/Fokus: schwarz */
+.newsletter-field input:focus,
+.newsletter-field select:focus,
+.newsletter-field input.newsletter-input--completed:focus,
+.newsletter-field select.newsletter-input--completed:focus {
+    color: #101923;
+    caret-color: #101923;
+    border-color: rgba(0, 87, 152, 0.66);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow:
+            0 0 0 5px rgba(0, 87, 152, 0.11),
+            0 18px 42px rgba(0, 87, 152, 0.13),
+            inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    transform: translateY(-1px);
+}
+
+/* Nach Blur/Wechsel mit Wert: blau */
+.newsletter-field input.newsletter-input--completed:not(:focus),
+.newsletter-field select.newsletter-input--completed:not(:focus) {
+    color: #005798;
+    caret-color: #005798;
+    font-weight: 900;
+    border-color: rgba(0, 87, 152, 0.58);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(226, 246, 255, 0.9));
+    box-shadow:
+            0 0 0 4px rgba(0, 87, 152, 0.08),
+            0 18px 42px rgba(0, 87, 152, 0.11),
+            inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+.newsletter-field input::placeholder {
+    color: rgba(16, 25, 35, 0.58);
+}
+
+.newsletter-field input.newsletter-input--completed:not(:focus)::placeholder {
+    color: #005798;
+    opacity: 0.82;
+}
+
+.newsletter-consent {
+    width: min(900px, 100%);
+    margin: 24px auto 0;
+    padding: 0 8px;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: flex-start;
+    color: #506473;
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 520;
+}
+
+.newsletter-consent input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #005798;
+}
+
+.newsletter-privacy-link {
+    color: #005798;
+    font-weight: 850;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.newsletter-integration-note {
+    width: min(840px, 100%);
+    margin: 12px auto 0;
+    padding-left: 38px;
+    box-sizing: border-box;
+    color: #667789;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.newsletter-submit {
+    width: min(520px, 100%);
+    min-height: 60px;
+    margin: 26px auto 0;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #005798 0%, #1f82c2 58%, #67bfff 132%);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 950;
+    letter-spacing: 0.01em;
+    box-shadow:
+            0 18px 38px rgba(0, 87, 152, 0.24),
+            inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition:
+            transform 0.18s ease,
+            box-shadow 0.18s ease,
+            filter 0.18s ease;
+}
+
+.newsletter-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+            0 22px 46px rgba(0, 87, 152, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.newsletter-submit:disabled {
+    cursor: wait;
+    filter: saturate(0.7);
+    opacity: 0.75;
+}
+
+.newsletter-status {
+    width: min(760px, 100%);
+    margin: 16px auto 0;
+    padding: 13px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    font-weight: 760;
+    line-height: 1.45;
+    text-align: center;
+}
+
+.newsletter-status--success {
+    color: #0b6b3d;
+    background: rgba(37, 181, 108, 0.1);
+    border: 1px solid rgba(37, 181, 108, 0.2);
+}
+
+.newsletter-status--error {
+    color: #a33428;
+    background: rgba(212, 71, 56, 0.1);
+    border: 1px solid rgba(212, 71, 56, 0.2);
+}
+
+/* Exit-Flyout beim Seitenwechsel */
+.newsletter-page.is-leaving .newsletter-catalog-img--left {
+    animation: newsletterSplitFlyLeft 0.95s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--right {
+    animation: newsletterSplitFlyRight 0.95s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+
+@keyframes newsletterSplitFlyLeft {
+    0% {
+        opacity: 0.94;
+        transform: rotate(-8deg) translate3d(0, 0, 0) scale(1);
+        filter: blur(0);
+    }
+    44% {
+        opacity: 0.7;
+        transform: rotate(-14deg) translate3d(-26vw, -1.5vh, 0) scale(0.92);
+        filter: blur(0.6px);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-24deg) translate3d(-126vw, -7vh, 0) scale(0.64);
+        filter: blur(2.8px);
+    }
+}
+
+@keyframes newsletterSplitFlyRight {
+    0% {
+        opacity: 0.94;
+        transform: rotate(8deg) translate3d(0, 0, 0) scale(1);
+        filter: blur(0);
+    }
+    44% {
+        opacity: 0.7;
+        transform: rotate(14deg) translate3d(26vw, -1.5vh, 0) scale(0.92);
+        filter: blur(0.6px);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(24deg) translate3d(126vw, -7vh, 0) scale(0.64);
+        filter: blur(2.8px);
+    }
+}
+
+@media (max-width: 1280px) {
+    .newsletter-form-card {
+        width: min(860px, calc(100vw - 44px));
+    }
+
+    .newsletter-catalog-img {
+        width: 330px;
+        height: 470px;
+        top: 104px;
+        opacity: 0.82;
+    }
+
+    .newsletter-catalog-img--left {
+        left: calc(50% - 595px);
+    }
+
+    .newsletter-catalog-img--right {
+        right: calc(50% - 595px);
+    }
+}
+
+@media (max-width: 980px) {
+    .newsletter-form-card {
+        width: min(720px, calc(100vw - 38px));
+    }
+
+    .newsletter-catalog-img {
+        width: 270px;
+        height: 390px;
+        top: 150px;
+        opacity: 0.58;
+    }
+
+    .newsletter-catalog-img--left {
+        left: calc(50% - 430px);
+    }
+
+    .newsletter-catalog-img--right {
+        right: calc(50% - 430px);
+    }
+}
+
+@media (max-width: 760px) {
+    .newsletter-page {
+        padding: 30px 14px 58px;
+    }
+
+    .newsletter-header {
+        padding-top: 112px;
+    }
+
+    .newsletter-stage {
+        width: 100%;
+        min-height: auto;
+        display: block;
+    }
+
+    .newsletter-catalog-split {
+        display: none;
+    }
+
+    .newsletter-form-card {
+        width: 100%;
+    }
+
+    .newsletter-field-row,
+    .newsletter-field-row--small-first {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .newsletter-field input,
+    .newsletter-field select {
+        border-radius: 18px;
+    }
+
+    .newsletter-consent,
+    .newsletter-integration-note {
+        width: 100%;
+    }
+
+    .newsletter-submit {
+        width: 100%;
+    }
+}
+
+
+
+/* =========================================================
+   NEWSLETTER WALKING CATALOGS — FIXED VISIBLE VERSION
+   Wichtig:
+   - KEIN opacity: 0 !important und KEIN transform: ... !important,
+     sonst kann die Keyframe-Animation nicht sichtbar werden.
+   - Kataloge sind klickbar, aber liegen hinter dem Formular.
+========================================================= */
+
+.newsletter-stage {
+    width: min(1640px, 100vw);
+    min-height: clamp(720px, 78vh, 920px);
+    overflow: visible;
+}
+
+.newsletter-catalog-split {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Alte statische Split-Positionen sicher neutralisieren */
+.newsletter-catalog-img--left,
+.newsletter-catalog-img--right {
+    display: none;
+}
+
+/* Neue laufende Katalogseiten */
+.newsletter-catalog-img--one,
+.newsletter-catalog-img--two {
+    position: absolute;
+    top: clamp(84px, 10vh, 118px);
+    left: 0;
+    right: auto;
+    width: clamp(420px, 28vw, 560px);
+    height: clamp(590px, 42vw, 760px);
+    display: block;
+    overflow: hidden;
+    border-radius: 30px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 87, 152, 0.12);
+    box-shadow:
+            0 34px 88px rgba(0, 42, 74, 0.16),
+            0 0 0 1px rgba(255, 255, 255, 0.92);
+    pointer-events: auto;
+    text-decoration: none;
+    transform-origin: center;
+    will-change: transform, opacity, filter;
+    animation-name: newsletterCatalogWalkAcrossFixed;
+    animation-duration: 24s;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.18, 1);
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.newsletter-catalog-img--one {
+    animation-delay: 0s;
+}
+
+.newsletter-catalog-img--two {
+    animation-delay: 8.15s;
+}
+
+.newsletter-catalog-img--one img,
+.newsletter-catalog-img--two img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Formular bleibt darüber */
+.newsletter-form-card {
+    position: relative;
+    z-index: 20;
+}
+
+/*
+   Timeline:
+   0-50% Bewegung
+   50-100% Pause unsichtbar
+   8% links komplett sichtbar
+   25% Mitte ca. 80%
+   42% rechts komplett sichtbar
+*/
+@keyframes newsletterCatalogWalkAcrossFixed {
+    0% {
+        opacity: 0;
+        transform: translate3d(-42vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.2px);
+    }
+
+    8% {
+        opacity: 1;
+        transform: translate3d(clamp(42px, 7vw, 150px), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    16% {
+        opacity: 0.92;
+        transform: translate3d(26vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    25% {
+        opacity: 0.8;
+        transform: translate3d(calc(50vw - (clamp(420px, 28vw, 560px) / 2)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.15px);
+    }
+
+    34% {
+        opacity: 0.9;
+        transform: translate3d(66vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    42% {
+        opacity: 1;
+        transform: translate3d(calc(100vw - clamp(42px, 7vw, 150px) - clamp(420px, 28vw, 560px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    50% {
+        opacity: 0;
+        transform: translate3d(108vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.2px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(108vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.2px);
+    }
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--one {
+    animation: newsletterCatalogLeaveLeftFixed 0.92s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--two {
+    animation: newsletterCatalogLeaveRightFixed 0.92s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+
+@keyframes newsletterCatalogLeaveLeftFixed {
+    0% {
+        opacity: 0.9;
+        transform: translate3d(clamp(42px, 7vw, 150px), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(-120vw, -5vh, 0) rotate(0deg) scale(0.78);
+        filter: blur(2.8px);
+    }
+}
+
+@keyframes newsletterCatalogLeaveRightFixed {
+    0% {
+        opacity: 0.9;
+        transform: translate3d(calc(100vw - clamp(42px, 7vw, 150px) - clamp(420px, 28vw, 560px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(120vw, -5vh, 0) rotate(0deg) scale(0.78);
+        filter: blur(2.8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two {
+        animation: none;
+        opacity: 0.84;
+        filter: none;
+    }
+
+    .newsletter-catalog-img--one {
+        transform: translate3d(clamp(42px, 7vw, 150px), 0, 0) rotate(0deg) scale(1);
+    }
+
+    .newsletter-catalog-img--two {
+        transform: translate3d(calc(100vw - clamp(42px, 7vw, 150px) - clamp(420px, 28vw, 560px)), 0, 0) rotate(0deg) scale(1);
+    }
+}
+
+@media (max-width: 980px) {
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two {
+        width: clamp(300px, 38vw, 390px);
+        height: clamp(420px, 54vw, 540px);
+        top: 140px;
+    }
+}
+
+@media (max-width: 760px) {
+    .newsletter-catalog-split {
+        display: none;
+    }
+}
+
+
+
+/* =========================================================
+   NEWSLETTER WALKING CATALOGS — BIGGER + RIGHT EDGE FIX
+   - Katalogseiten größer
+   - rechter Rand wird später abgeschnitten
+   - rechts gibt es eine kurze volle Sichtbarkeit/Haltephase
+   - Laufbahn ist breiter als der sichtbare Viewport
+   GANZ UNTEN IN Newsletter.css lassen
+========================================================= */
+
+.newsletter-stage {
+    width: min(1800px, 100vw) !important;
+    min-height: clamp(790px, 84vh, 1040px) !important;
+    overflow: visible !important;
+}
+
+/* Laufbahn breiter machen, aber Seite selbst bleibt horizontal sauber */
+.newsletter-catalog-split {
+    left: -12vw !important;
+    right: -12vw !important;
+    width: auto !important;
+    overflow: visible !important;
+}
+
+/* Größere, gerade Katalogseiten */
+.newsletter-catalog-img--one,
+.newsletter-catalog-img--two {
+    top: clamp(52px, 7.5vh, 92px) !important;
+    width: clamp(500px, 34vw, 690px) !important;
+    height: clamp(705px, 50vw, 940px) !important;
+    border-radius: 34px !important;
+    box-shadow:
+            0 42px 110px rgba(0, 42, 74, 0.18),
+            0 0 0 1px rgba(255, 255, 255, 0.94) !important;
+    animation-name: newsletterCatalogWalkAcrossBiggerFixed !important;
+    animation-duration: 28s !important;
+    animation-timing-function: cubic-bezier(0.38, 0, 0.16, 1) !important;
+}
+
+/* zweites Bild so versetzt, dass beide links/rechts gemeinsam voll sichtbar werden */
+.newsletter-catalog-img--two {
+    animation-delay: 9.4s !important;
+}
+
+/*
+   Wichtig:
+   Die Laufbahn ist durch .newsletter-catalog-split links/rechts um 12vw erweitert.
+   Deshalb darf das Bild über den normalen rechten Rand hinaus wandern,
+   ohne sofort abgeschnitten zu werden.
+*/
+@keyframes newsletterCatalogWalkAcrossBiggerFixed {
+    0% {
+        opacity: 0;
+        transform: translate3d(-48vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.4px);
+    }
+
+    7% {
+        opacity: 1;
+        transform: translate3d(13vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    15% {
+        opacity: 0.93;
+        transform: translate3d(30vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    25% {
+        opacity: 0.8;
+        transform: translate3d(calc(62vw - (clamp(500px, 34vw, 690px) / 2)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.12px);
+    }
+
+    35% {
+        opacity: 0.92;
+        transform: translate3d(78vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    /* rechts komplett sichtbar */
+    43% {
+        opacity: 1;
+        transform: translate3d(calc(112vw - clamp(500px, 34vw, 690px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    /* kleine Haltephase rechts, damit es nicht zu früh abgeschnitten wirkt */
+    48% {
+        opacity: 1;
+        transform: translate3d(calc(112vw - clamp(500px, 34vw, 690px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    56% {
+        opacity: 0;
+        transform: translate3d(128vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.4px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(128vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.4px);
+    }
+}
+
+/* Seitenwechsel-Flyout an die größere Größe anpassen */
+.newsletter-page.is-leaving .newsletter-catalog-img--one {
+    animation: newsletterCatalogLeaveLeftBiggerFixed 0.92s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--two {
+    animation: newsletterCatalogLeaveRightBiggerFixed 0.92s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+@keyframes newsletterCatalogLeaveLeftBiggerFixed {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(13vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-130vw, -5vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@keyframes newsletterCatalogLeaveRightBiggerFixed {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(calc(112vw - clamp(500px, 34vw, 690px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(140vw, -5vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@media (max-width: 1180px) {
+    .newsletter-stage {
+        min-height: clamp(700px, 78vh, 880px) !important;
+    }
+
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two {
+        width: clamp(390px, 42vw, 520px) !important;
+        height: clamp(550px, 60vw, 720px) !important;
+        top: clamp(82px, 10vh, 126px) !important;
+    }
+
+    @keyframes newsletterCatalogWalkAcrossBiggerFixed {
+        0% {
+            opacity: 0;
+            transform: translate3d(-52vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.4px);
+        }
+
+        8% {
+            opacity: 1;
+            transform: translate3d(10vw, 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        25% {
+            opacity: 0.8;
+            transform: translate3d(calc(62vw - (clamp(390px, 42vw, 520px) / 2)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0.12px);
+        }
+
+        43%, 48% {
+            opacity: 1;
+            transform: translate3d(calc(112vw - clamp(390px, 42vw, 520px)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        56%, 100% {
+            opacity: 0;
+            transform: translate3d(128vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.4px);
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .newsletter-catalog-split {
+        display: none !important;
+    }
+}
+
+
+
+/* =========================================================
+   NEWSLETTER WALKING CATALOGS — HIGHER + 20% MID FADE
+   - Bilder deutlich höher, fast von oben bis unten
+   - In der Mitte auf ca. 20% Sichtbarkeit ausblenden
+   - Rechts weiterhin später abgeschnitten / kurze Haltephase
+   GANZ UNTEN IN Newsletter.css lassen
+========================================================= */
+
+.newsletter-stage {
+    width: min(1840px, 100vw) !important;
+    min-height: calc(100vh - 110px) !important;
+    overflow: visible !important;
+}
+
+.newsletter-catalog-split {
+    left: -14vw !important;
+    right: -14vw !important;
+    width: auto !important;
+    overflow: visible !important;
+}
+
+/* Bilder fast über die ganze Seitenhöhe ziehen */
+.newsletter-catalog-img--one,
+.newsletter-catalog-img--two {
+    top: clamp(8px, 1.6vh, 20px) !important;
+    width: clamp(540px, 35vw, 760px) !important;
+    height: clamp(860px, 92vh, 1220px) !important;
+    border-radius: 34px !important;
+    box-shadow:
+            0 44px 118px rgba(0, 42, 74, 0.19),
+            0 0 0 1px rgba(255, 255, 255, 0.96) !important;
+    animation-name: newsletterCatalogWalkAcrossTallFade !important;
+    animation-duration: 28s !important;
+    animation-timing-function: cubic-bezier(0.38, 0, 0.16, 1) !important;
+}
+
+.newsletter-catalog-img--two {
+    animation-delay: 9.4s !important;
+}
+
+/* Desktop / large */
+@keyframes newsletterCatalogWalkAcrossTallFade {
+    0% {
+        opacity: 0;
+        transform: translate3d(-52vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.6px);
+    }
+
+    7% {
+        opacity: 1;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    15% {
+        opacity: 0.88;
+        transform: translate3d(28vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    /* Mitte stark ausblenden auf 20% */
+    25% {
+        opacity: 0.2;
+        transform: translate3d(calc(62vw - (clamp(540px, 35vw, 760px) / 2)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.2px);
+    }
+
+    35% {
+        opacity: 0.86;
+        transform: translate3d(78vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    /* Rechts komplett sichtbar */
+    43% {
+        opacity: 1;
+        transform: translate3d(calc(114vw - clamp(540px, 35vw, 760px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    /* kleine Haltephase rechts */
+    48% {
+        opacity: 1;
+        transform: translate3d(calc(114vw - clamp(540px, 35vw, 760px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    56% {
+        opacity: 0;
+        transform: translate3d(132vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.6px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(132vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.6px);
+    }
+}
+
+/* Flyout an neue Größe anpassen */
+.newsletter-page.is-leaving .newsletter-catalog-img--one {
+    animation: newsletterCatalogLeaveLeftTallFade 0.92s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--two {
+    animation: newsletterCatalogLeaveRightTallFade 0.92s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+@keyframes newsletterCatalogLeaveLeftTallFade {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-134vw, -5vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@keyframes newsletterCatalogLeaveRightTallFade {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(calc(114vw - clamp(540px, 35vw, 760px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(144vw, -5vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@media (max-width: 1180px) {
+    .newsletter-stage {
+        min-height: calc(100vh - 110px) !important;
+    }
+
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two {
+        top: clamp(18px, 2vh, 28px) !important;
+        width: clamp(420px, 44vw, 560px) !important;
+        height: clamp(650px, 84vh, 900px) !important;
+    }
+
+    @keyframes newsletterCatalogWalkAcrossTallFade {
+        0% {
+            opacity: 0;
+            transform: translate3d(-56vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.4px);
+        }
+
+        8% {
+            opacity: 1;
+            transform: translate3d(10vw, 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        25% {
+            opacity: 0.2;
+            transform: translate3d(calc(62vw - (clamp(420px, 44vw, 560px) / 2)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0.18px);
+        }
+
+        43%, 48% {
+            opacity: 1;
+            transform: translate3d(calc(114vw - clamp(420px, 44vw, 560px)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        56%, 100% {
+            opacity: 0;
+            transform: translate3d(132vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.4px);
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .newsletter-catalog-split {
+        display: none !important;
+    }
+}
+
+
+
+/* =========================================================
+   NEWSLETTER WALKING CATALOGS — FASTER CHASE + TITLE TOP ALIGN
+   - Bilder liegen höher, nahe an der Unterkante/Oberkante des Titelbereichs
+   - Wanderung ist schneller
+   - Ruhe-/Pausephase bleibt lang
+   - Zweites Bild wandert erst Richtung Mitte, wenn das erste Bild rauswandert
+   GANZ UNTEN IN Newsletter.css lassen
+========================================================= */
+
+.newsletter-stage {
+    width: min(1880px, 100vw) !important;
+    min-height: calc(100vh - 90px) !important;
+    margin-top: 0 !important;
+    overflow: visible !important;
+}
+
+.newsletter-catalog-split {
+    left: -15vw !important;
+    right: -15vw !important;
+    width: auto !important;
+    overflow: visible !important;
+}
+
+/* näher an den Titel, fast von oben bis unten */
+.newsletter-catalog-img--one,
+.newsletter-catalog-img--two {
+    top: clamp(-2px, 0.6vh, 8px) !important;
+    width: clamp(560px, 36vw, 790px) !important;
+    height: clamp(900px, 94vh, 1260px) !important;
+    border-radius: 34px !important;
+    animation-name: newsletterCatalogWalkChaseTitleAligned !important;
+    animation-duration: 22s !important;
+    animation-timing-function: cubic-bezier(0.36, 0, 0.14, 1) !important;
+}
+
+/*
+   Erster Lauf:
+   0s - ca. 10s: Bewegung
+   ca. 10s - 22s: Ruhe/Pause unsichtbar
+
+   Zweites Bild startet später:
+   Es kommt links rein, während Bild 1 rechts rausgeht.
+   Dadurch erreicht Bild 2 die Mitte erst, wenn Bild 1 bereits ausläuft.
+*/
+.newsletter-catalog-img--one {
+    animation-delay: 0s !important;
+}
+
+.newsletter-catalog-img--two {
+    animation-delay: 6.2s !important;
+}
+
+/*
+   Timeline bei 22s:
+   0-46% = schnelle Wanderung
+   46-100% = lange Ruhephase
+   7% links komplett sichtbar
+   27% Mitte: 20% sichtbar
+   39-43% rechts komplett sichtbar / kurzer Halt
+   46% raus
+*/
+@keyframes newsletterCatalogWalkChaseTitleAligned {
+    0% {
+        opacity: 0;
+        transform: translate3d(-54vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.6px);
+    }
+
+    7% {
+        opacity: 1;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    15% {
+        opacity: 0.84;
+        transform: translate3d(28vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.05px);
+    }
+
+    27% {
+        opacity: 0.2;
+        transform: translate3d(calc(62vw - (clamp(560px, 36vw, 790px) / 2)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.25px);
+    }
+
+    34% {
+        opacity: 0.72;
+        transform: translate3d(80vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.05px);
+    }
+
+    39% {
+        opacity: 1;
+        transform: translate3d(calc(115vw - clamp(560px, 36vw, 790px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    43% {
+        opacity: 1;
+        transform: translate3d(calc(115vw - clamp(560px, 36vw, 790px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    46% {
+        opacity: 0;
+        transform: translate3d(134vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.6px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(134vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.6px);
+    }
+}
+
+/* Seitenwechsel-Flyout an hohe Bilder anpassen */
+.newsletter-page.is-leaving .newsletter-catalog-img--one {
+    animation: newsletterCatalogLeaveLeftChaseTitleAligned 0.82s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--two {
+    animation: newsletterCatalogLeaveRightChaseTitleAligned 0.82s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+@keyframes newsletterCatalogLeaveLeftChaseTitleAligned {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-138vw, -4vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@keyframes newsletterCatalogLeaveRightChaseTitleAligned {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(calc(115vw - clamp(560px, 36vw, 790px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(148vw, -4vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@media (max-width: 1180px) {
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two {
+        top: clamp(8px, 1vh, 16px) !important;
+        width: clamp(430px, 45vw, 580px) !important;
+        height: clamp(700px, 86vh, 940px) !important;
+    }
+
+    @keyframes newsletterCatalogWalkChaseTitleAligned {
+        0% {
+            opacity: 0;
+            transform: translate3d(-58vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.4px);
+        }
+
+        7% {
+            opacity: 1;
+            transform: translate3d(9vw, 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        27% {
+            opacity: 0.2;
+            transform: translate3d(calc(62vw - (clamp(430px, 45vw, 580px) / 2)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0.2px);
+        }
+
+        39%, 43% {
+            opacity: 1;
+            transform: translate3d(calc(115vw - clamp(430px, 45vw, 580px)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        46%, 100% {
+            opacity: 0;
+            transform: translate3d(134vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.4px);
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .newsletter-catalog-split {
+        display: none !important;
+    }
+}
+
+
+
+/* =========================================================
+   NEWSLETTER WALKING CATALOGS — 3 STEP WALK + BLUE SHIMMER
+   - Pro Bild nur 3 klare Bewegungsphasen:
+     1) rein kommen + links kurz stehen
+     2) durch die Mitte nach rechts laufen, Mitte auf 20% opacity
+     3) rechts kurz stehen + raus
+   - Hellblaue Schimmer-Welle läuft über jedes Bild von links nach rechts
+   - Kataloge bleiben klickbar
+   GANZ UNTEN IN Newsletter.css lassen
+========================================================= */
+
+.newsletter-catalog-split {
+    left: -16vw !important;
+    right: -16vw !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+}
+
+.newsletter-catalog-img--one,
+.newsletter-catalog-img--two {
+    top: clamp(-4px, 0.5vh, 8px) !important;
+    width: clamp(560px, 36vw, 790px) !important;
+    height: clamp(900px, 94vh, 1260px) !important;
+    overflow: hidden !important;
+    pointer-events: auto !important;
+    isolation: isolate !important;
+    animation-name: newsletterCatalogThreeStepWalk !important;
+    animation-duration: 22s !important;
+    animation-timing-function: cubic-bezier(0.34, 0, 0.16, 1) !important;
+    animation-iteration-count: infinite !important;
+    animation-fill-mode: both !important;
+}
+
+/* Beide Bilder laufen nacheinander versetzt */
+.newsletter-catalog-img--one {
+    animation-delay: 0s !important;
+}
+
+.newsletter-catalog-img--two {
+    animation-delay: 7.35s !important;
+}
+
+/* Bild bleibt hinter Formular, Schimmer liegt über dem Bild */
+.newsletter-catalog-img--one img,
+.newsletter-catalog-img--two img {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hellblaue Schimmerwelle über jedem Katalog */
+.newsletter-catalog-img--one::after,
+.newsletter-catalog-img--two::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: -18%;
+    bottom: -18%;
+    left: -62%;
+    width: 42%;
+    pointer-events: none;
+    opacity: 0;
+    transform: skewX(-18deg) translateX(0);
+    background:
+            linear-gradient(
+                    90deg,
+                    rgba(110, 195, 255, 0) 0%,
+                    rgba(110, 195, 255, 0.12) 18%,
+                    rgba(205, 244, 255, 0.82) 48%,
+                    rgba(110, 195, 255, 0.22) 72%,
+                    rgba(110, 195, 255, 0) 100%
+            );
+    filter: blur(0.4px);
+    mix-blend-mode: screen;
+    animation-name: newsletterCatalogBlueShimmer;
+    animation-duration: 22s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.newsletter-catalog-img--one::after {
+    animation-delay: 0s;
+}
+
+.newsletter-catalog-img--two::after {
+    animation-delay: 7.35s;
+}
+
+/*
+   3-Schritt-Timeline pro Bild:
+   0-8%      rein kommen
+   8-14%     links kurz stehen, komplett sichtbar
+   14-31%    durch die Mitte wandern, Mitte sehr transparent
+   31-39%    rechts kurz stehen, komplett sichtbar
+   39-46%    raus
+   46-100%   Pause unsichtbar
+*/
+@keyframes newsletterCatalogThreeStepWalk {
+    0% {
+        opacity: 0;
+        transform: translate3d(-58vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.4px);
+    }
+
+    /* Schritt 1: rein und links stehen */
+    8% {
+        opacity: 1;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    14% {
+        opacity: 1;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    /* Schritt 2: Mitte, stark ausgeblendet */
+    24% {
+        opacity: 0.2;
+        transform: translate3d(calc(62vw - (clamp(560px, 36vw, 790px) / 2)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0.25px);
+    }
+
+    /* Schritt 3: rechts stehen */
+    31% {
+        opacity: 1;
+        transform: translate3d(calc(115vw - clamp(560px, 36vw, 790px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    39% {
+        opacity: 1;
+        transform: translate3d(calc(115vw - clamp(560px, 36vw, 790px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    46% {
+        opacity: 0;
+        transform: translate3d(136vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.4px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(136vw, 0, 0) rotate(0deg) scale(0.985);
+        filter: blur(2.4px);
+    }
+}
+
+/* Schimmer passend zu den sichtbaren Phasen, besonders links/rechts */
+@keyframes newsletterCatalogBlueShimmer {
+    0%, 6% {
+        opacity: 0;
+        transform: skewX(-18deg) translateX(0);
+    }
+
+    8% {
+        opacity: 0.82;
+        transform: skewX(-18deg) translateX(0);
+    }
+
+    14% {
+        opacity: 0;
+        transform: skewX(-18deg) translateX(430%);
+    }
+
+    22%, 28% {
+        opacity: 0;
+        transform: skewX(-18deg) translateX(0);
+    }
+
+    31% {
+        opacity: 0.76;
+        transform: skewX(-18deg) translateX(0);
+    }
+
+    39% {
+        opacity: 0;
+        transform: skewX(-18deg) translateX(430%);
+    }
+
+    46%, 100% {
+        opacity: 0;
+        transform: skewX(-18deg) translateX(430%);
+    }
+}
+
+/* Seitenwechsel-Flyout mit dem neuen 3-Step Zustand */
+.newsletter-page.is-leaving .newsletter-catalog-img--one {
+    animation: newsletterCatalogLeaveLeftThreeStep 0.82s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+.newsletter-page.is-leaving .newsletter-catalog-img--two {
+    animation: newsletterCatalogLeaveRightThreeStep 0.82s cubic-bezier(0.64, 0, 0.78, 0) forwards !important;
+}
+
+@keyframes newsletterCatalogLeaveLeftThreeStep {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(12vw, 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-138vw, -4vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@keyframes newsletterCatalogLeaveRightThreeStep {
+    0% {
+        opacity: 0.95;
+        transform: translate3d(calc(115vw - clamp(560px, 36vw, 790px)), 0, 0) rotate(0deg) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(148vw, -4vh, 0) rotate(0deg) scale(0.76);
+        filter: blur(3px);
+    }
+}
+
+@media (max-width: 1180px) {
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two {
+        top: clamp(8px, 1vh, 16px) !important;
+        width: clamp(430px, 45vw, 580px) !important;
+        height: clamp(700px, 86vh, 940px) !important;
+    }
+
+    @keyframes newsletterCatalogThreeStepWalk {
+        0% {
+            opacity: 0;
+            transform: translate3d(-60vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.3px);
+        }
+
+        8%, 14% {
+            opacity: 1;
+            transform: translate3d(9vw, 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        24% {
+            opacity: 0.2;
+            transform: translate3d(calc(62vw - (clamp(430px, 45vw, 580px) / 2)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0.22px);
+        }
+
+        31%, 39% {
+            opacity: 1;
+            transform: translate3d(calc(115vw - clamp(430px, 45vw, 580px)), 0, 0) rotate(0deg) scale(1);
+            filter: blur(0);
+        }
+
+        46%, 100% {
+            opacity: 0;
+            transform: translate3d(136vw, 0, 0) rotate(0deg) scale(0.985);
+            filter: blur(2.3px);
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .newsletter-catalog-split {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .newsletter-catalog-img--one,
+    .newsletter-catalog-img--two,
+    .newsletter-catalog-img--one::after,
+    .newsletter-catalog-img--two::after {
+        animation: none !important;
+    }
+
+    .newsletter-catalog-img--one {
+        opacity: 0.84 !important;
+        transform: translate3d(9vw, 0, 0) rotate(0deg) scale(1) !important;
+    }
+
+    .newsletter-catalog-img--two {
+        opacity: 0.84 !important;
+        transform: translate3d(calc(115vw - clamp(430px, 45vw, 580px)), 0, 0) rotate(0deg) scale(1) !important;
+    }
+}

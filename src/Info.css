@@ -1,7 +1,87 @@
-.company-info-box {
+/* ────────────────────────────────────────────────────────────────────────
+   Floating wrapper for logo + info box
+───────────────────────────────────────────────────────────────────────── */
+.info-floating-wrap {
     position: fixed;
-    top: 110px; /* adjust depending on header height */
-    right: 50px;
+    top: 140px;
+    right: 40px;
+    z-index: 3000;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    pointer-events: none;
+}
+
+/* Info im Katalog-Landing ausblenden */
+body.products-navbar-collapsed .info-floating-wrap,
+html.products-navbar-collapsed .info-floating-wrap {
+    display: none !important;
+}
+
+/* allow clicks on the actual elements */
+.info-floating-wrap > * {
+    pointer-events: auto;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Animated logo badge
+───────────────────────────────────────────────────────────────────────── */
+.info-logo-badge {
+    width: 74px;
+    height: 74px;
+    border-radius: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    border: none;
+    animation: infoLogoPulseClean 3s ease-in-out infinite;
+}
+
+.info-logo-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
+}
+
+@keyframes infoLogoPulseClean {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 8px 14px rgba(0, 87, 152, 0.18));
+    }
+
+    25% {
+        opacity: 0.42;
+        transform: scale(0.94);
+        filter: drop-shadow(0 4px 8px rgba(0, 87, 152, 0.08));
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+        filter: drop-shadow(0 10px 20px rgba(0, 87, 152, 0.34));
+    }
+
+    75% {
+        opacity: 0.48;
+        transform: scale(0.96);
+        filter: drop-shadow(0 4px 8px rgba(0, 87, 152, 0.08));
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 8px 14px rgba(0, 87, 152, 0.18));
+    }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Company info box
+───────────────────────────────────────────────────────────────────────── */
+.company-info-box {
     width: 220px;
     background-color: #003366;
     color: white;
@@ -9,17 +89,23 @@
     border-radius: 10px;
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    z-index: 1050;
-    opacity: 0.9;
-    font-family: 'Anton', sans-serif;
+    opacity: 0.94;
+    font-family: "Anton", sans-serif;
+    box-sizing: border-box;
 }
 
-.company-info-box h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
+.info-content h2 {
+    margin: 0 0 10px 0;
     font-size: 16px;
-    font-family: 'Anton', sans-serif;
-    color: #aad8ff;
+    line-height: 1.2;
+    color: #ffffff;
+    font-family: "Anton", sans-serif;
+}
+
+.company-info-box p {
+    margin: 0 0 10px 0;
+    line-height: 1.35;
+    font-family: Arial, sans-serif;
 }
 
 .company-info-box a {
@@ -31,4 +117,43 @@
     text-decoration: underline;
 }
 
+/* ────────────────────────────────────────────────────────────────────────
+   Tablet
+───────────────────────────────────────────────────────────────────────── */
+@media (max-width: 992px) {
+    .info-floating-wrap {
+        top: 110px;
+        right: 20px;
+        gap: 10px;
+    }
 
+    .info-logo-badge {
+        width: 62px;
+        height: 62px;
+        border-radius: 14px;
+    }
+
+    .info-logo-img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .company-info-box {
+        width: 190px;
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    .info-content h2 {
+        font-size: 14px;
+    }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Mobile
+───────────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .info-floating-wrap {
+        display: none;
+    }
+}

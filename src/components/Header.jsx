@@ -5,24 +5,25 @@ import "../Header.css";
 import { Language } from "../context/LanguageContext";
 
 function Header() {
-    const [scrolled, setScrolled] = useState(false);
+    const [compact, setCompact] = useState(false);
     const [showTopBar, setShowTopBar] = useState(false);
     const { language, toggleLanguage, t } = useContext(Language);
 
     useEffect(() => {
         let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
             const currentY = window.scrollY;
-            setScrolled(currentY > 80);
-
             const scrollingUp = currentY < lastScrollY;
-            const nearTop = currentY < 200;
+            const nearTop = currentY < 160;
+
+            setCompact(currentY > 70);
             setShowTopBar(scrollingUp && !nearTop);
 
             lastScrollY = currentY;
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -30,26 +31,29 @@ function Header() {
         <>
             {showTopBar && (
                 <div className="top-action-bar">
-                    <button>{t("contact.topicJobs") /* z.B. „Bewerber“ */}</button>
-                    <button>{t("nav.contact") /* „Kontakt“ */}</button>
-                    <button>{t("info.company") /* „Standort“ (als Platzhalter) */}</button>
+                    <button>{t("contact.topicJobs")}</button>
+                    <button>{t("nav.contact")}</button>
+                    <button>{t("info.company")}</button>
                 </div>
             )}
 
-            <header className={`header ${scrolled ? "scrolled" : ""}`}>
-                <div className="branding">
-                    <img src={logo} alt="RE-Schraub Logo" className="logo" />
-                    <h1 className="company-title">RE-Schraub GmbH</h1>
+            <header className="header">
+                <div className="header-top">
+
+                    <div className="branding">
+                        <img src={logo} alt="RE-Schraub Logo" className="logo"/>
+                        <h1 className="company-title">RE-Schraub GmbH</h1>
+                    </div>
+
+                    <div className="header-actions">
+                        <button className="lang-toggle" onClick={toggleLanguage}>
+                            {language === "de" ? "EN" : "DE"}
+                        </button>
+                    </div>
+
                 </div>
 
-                {/* Language‐Toggle oben rechts */}
-                <div className="header-actions">
-                    <button className="lang-toggle" onClick={toggleLanguage}>
-                        {language === "de" ? "EN" : "DE"}
-                    </button>
-                </div>
-
-                <Navbar />
+                <Navbar/>
             </header>
         </>
     );

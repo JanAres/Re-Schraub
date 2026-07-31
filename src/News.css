@@ -1,24 +1,39 @@
-/* News.css */
+/* ————————————————
+   Reset-Grundregeln
+—————————————————— */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
 
-/* Farb- und Größen-Variablen */
+/* ————————————————
+   Farb- und Größen-Variablen inkl. A4-Box-Größe
+—————————————————— */
 :root {
     --color-bg-page: #ffffff;
-    --color-accent: #000000;
-    --color-accent-hover: #0055a5;
+    --color-accent: #005798;
+    --color-accent-hover: #003e6a;
     --color-card-bg: rgba(255, 255, 255, 0.9);
-    --color-card-border: #2f7ed8;
+    --color-card-border: #005798;
     --font-title: 'Anton', sans-serif;
     --font-text: 'Arial', sans-serif;
     --radius-card: 12px;
     --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.15);
-    --spacing-page: 40px;
-    --spacing-card: 20px;
-    --spacing-small: 10px;
+    --spacing-page: 40px;   /* Abstand oben/rechts/unten innerhalb .news-page */
+    --spacing-card: 20px;   /* Gap zwischen Flex-Items */
+    --spacing-small: 20px;  /* Grid-Gap für Galerie */
+
+    /* DIN A4-Box-Größe */
+    --a4-width: 400px;
+    --a4-height: calc(var(--a4-width) * 297 / 210);
 }
 
-/* Gesamtseite */
+/* ————————————————
+   Gesamt-Seite (.news-page)
+—————————————————— */
 .news-page {
-    padding: var(--spacing-page);
+    padding: var(--spacing-page) var(--spacing-page) var(--spacing-page) 0;
     background-color: var(--color-bg-page);
     font-family: var(--font-text);
     text-align: center;
@@ -33,26 +48,43 @@
     letter-spacing: 1px;
 }
 
-/* Container für die Karte(n) */
+/* ————————————————
+   Container: Karte links, A4-Box rechts
+—————————————————— */
 .news-container {
+    width: 100%;
+    margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: stretch;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap; /* Damit mehrere Karten untereinander fließen können */
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: var(--spacing-card);
+    box-sizing: border-box;
 }
 
-/* Einzelne News-Karte */
+
+.news-main {
+    flex: 1;
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.news-gallery {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+}
+
+
 .news-card {
     position: relative;
     display: flex;
     flex-direction: row;
     background: var(--color-card-bg);
     width: 100%;
-    max-width: 900px;
-    min-height: 350px;
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
     overflow: hidden;
@@ -61,63 +93,19 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover-Effekt der Karte */
 .news-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Textbereich innerhalb der Karte */
-.news-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-right: var(--spacing-card);
-    overflow: hidden;
-}
-
-/* Überschrift in der Karte */
-.news-text h2 {
-    font-family: var(--font-title);
-    font-size: 2rem;
-    color: #000000;
-    margin-bottom: var(--spacing-small);
-    line-height: 1.2;
-}
-
-/* Fließtext in der Karte */
-.news-text p {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: var(--spacing-small);
-    color: #333333;
-    flex-grow: 1;
-}
-
-/* Aufzählungspunkte innerhalb der Karte */
-.desc-points {
-    list-style: disc;
-    padding-left: 1.2rem;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.desc-points li {
-    margin-bottom: 0.4rem;
-    word-wrap: break-word;
-}
-
-/* Bild-Container in der Karte */
+/* Bild-Container ganz links */
 .news-img-box {
-    width: 300px;
-    height: auto;
+    flex: 0 0 50%;               /* Bild nimmt 50 % der Kartenbreite ein */
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-card);
-    flex-shrink: 0;
     transition: transform 0.5s ease-in-out;
+    order: 0;                    /* Bild an erster Stelle */
 }
 
 .news-img-box:hover {
@@ -131,7 +119,50 @@
     display: block;
 }
 
-/* Bild-Drehung beim Seitenwechsel */
+/* Text-Container ganz rechts */
+.news-text {
+    flex: 0 0 50%;               /* Text nimmt 50 % der Kartenbreite ein */
+    order: 1;                    /* Text an zweiter Stelle */
+    margin-left: auto;           /* schiebt den Text bis ganz rechts */
+    background: rgba(255, 255, 255, 0.9);
+    padding: var(--spacing-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.news-text h2 {
+    font-family: var(--font-title);
+    font-size: 1.75rem;
+    color: #000000;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.news-text p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+    color: #333333;
+    flex-grow: 1;
+}
+
+.desc-points {
+    list-style: disc;
+    padding-left: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.desc-points li {
+    margin-bottom: 0.2rem;
+    word-wrap: break-word;
+}
+
+/* Bild-Drehung beim Wechseln */
 .news-img-box img.rotate {
     animation: rotate 0.5s ease-in-out;
 }
@@ -145,15 +176,26 @@
     }
 }
 
-/* Button-Leiste */
+/* ————————————————
+   Button-Leiste direkt unter der Karte
+—————————————————— */
 .button-container {
+    width: 100%;
+    margin-top: calc(var(--spacing-card) + 20px);
+    /* „200px“ ist ein Puffer, damit Buttons nicht überlappen */
     display: flex;
     justify-content: center;
     gap: var(--spacing-card);
-    margin-top: 2rem;
 }
 
-/* Allgemeine Button-Stile */
+.button-container button {
+    width: auto;
+    padding: var(--spacing-small) var(--spacing-card);
+}
+
+/* ————————————————
+   Allgemeine Button-Stile
+—————————————————— */
 button {
     background: var(--color-accent);
     color: white;
@@ -169,21 +211,21 @@ button {
     gap: 0.5rem;
 }
 
-/* Button-Hover und -Focus */
 button:hover,
 button:focus {
     background: var(--color-accent-hover);
     transform: translateY(-2px);
 }
 
-/* SVG-Icon in Buttons */
 button svg {
     width: 1rem;
     height: 1rem;
     fill: white;
 }
 
-/* Volle Breite Banner */
+/* ————————————————
+   Volle Breite Banner
+—————————————————— */
 .full-width-banner {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
@@ -197,20 +239,106 @@ button svg {
     z-index: 0;
 }
 
-/* Responsive Anpassungen */
-@media (max-width: 900px) {
-    .news-card {
-        flex-direction: column;
-        max-width: 90%;
-        min-height: auto;
+/* ————————————————
+   Rechte Spalte: DIN A4-Box mit Flip-Animation
+—————————————————— */
+.a4-box {
+    width: var(--a4-width);
+    height: var(--a4-height);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    background-color: #ffffff;
+    perspective: 1200px;
+}
+
+.a4-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.a4-box.flip {
+    animation: flip-horizontal 0.6s ease-in-out;
+}
+
+@keyframes flip-horizontal {
+    0% {
+        transform: rotateY(0deg);
     }
-    .news-img-box {
+    50% {
+        transform: rotateY(90deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+/* ————————————————
+   Download-Link
+—————————————————— */
+.download-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.download-link {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.download-link:hover,
+.download-link:focus {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+}
+
+/* ————————————————
+   Responsive Anpassungen
+—————————————————— */
+@media (max-width: 900px) {
+    .news-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .full-width-banner {
+        display: none !important;
+    }
+    .news-main {
+        max-width: 100%;
+    }
+    .news-gallery {
         width: 100%;
-        height: 200px;
+        margin-left: 0;
+        margin-top: var(--spacing-card);
+    }
+    .a4-box {
+        width: 80%;
+        height: calc(80% * 297 / 210);
+    }
+    /* Unter 900px: Bild und Text untereinander */
+    .news-img-box {
+        flex: none;
+        width: 100%;
         margin-bottom: var(--spacing-card);
     }
     .news-text {
-        padding-right: 0;
+        flex: none;
+        width: 100%;
+        margin-left: 0;
+        background: rgba(255, 255, 255, 1);
+    }
+    .button-container {
+        margin-top: var(--spacing-card);
     }
 }
 
@@ -221,5 +349,246 @@ button svg {
     button {
         font-size: 0.85rem;
         padding: 0.6rem 1.2rem;
+    }
+    .news-gallery {
+        width: 100%;
+    }
+    .a4-box {
+        width: 100%;
+        height: calc(100% * 297 / 210);
+    }
+}
+
+/* =========================================================
+   NEWS — MOBILE FINAL PATCH
+   Ganz unten in News.css einfügen
+========================================================= */
+
+.news-page {
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.news-container,
+.news-card,
+.news-main,
+.news-gallery {
+    box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+    :root {
+        --a4-width: min(340px, 32vw);
+    }
+
+    .news-page {
+        padding: 32px 18px 42px !important;
+    }
+
+    .news-container {
+        gap: 18px !important;
+    }
+
+    .news-main {
+        max-width: 62% !important;
+    }
+
+    .news-gallery {
+        width: 34% !important;
+    }
+
+    .news-text h2 {
+        font-size: 1.45rem !important;
+    }
+
+    .news-text p,
+    .desc-points {
+        font-size: 0.82rem !important;
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --a4-width: min(420px, 92vw);
+    }
+
+    .news-page {
+        width: 100% !important;
+        min-height: 100dvh !important;
+        padding: 28px 14px 46px !important;
+        text-align: center !important;
+        background: #ffffff !important;
+    }
+
+    .news-title {
+        font-size: clamp(2.5rem, 12vw, 4.8rem) !important;
+        line-height: 0.92 !important;
+        margin: 0 0 24px !important;
+        color: var(--color-accent) !important;
+    }
+
+    .news-container {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 28px !important;
+    }
+
+    .news-main {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .news-card {
+        width: 100% !important;
+        max-width: 620px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+        padding: 14px !important;
+        border-radius: 18px !important;
+        border-bottom-width: 4px !important;
+        overflow: visible !important;
+    }
+
+    .news-card:hover {
+        transform: none !important;
+    }
+
+    .news-img-box {
+        order: 0 !important;
+        flex: none !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 10 !important;
+        margin: 0 !important;
+        border-radius: 14px !important;
+    }
+
+    .news-img-box:hover {
+        transform: none !important;
+    }
+
+    .news-img-box img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .news-text {
+        order: 1 !important;
+        flex: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 16px !important;
+        border-radius: 14px !important;
+        text-align: left !important;
+        box-shadow: none !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+    }
+
+    .news-text h2 {
+        font-size: clamp(1.45rem, 6vw, 2rem) !important;
+        line-height: 1.05 !important;
+        margin-bottom: 4px !important;
+    }
+
+    .news-text p {
+        font-size: 0.96rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .desc-points {
+        padding-left: 1.1rem !important;
+        font-size: 0.92rem !important;
+        line-height: 1.45 !important;
+    }
+
+    .button-container {
+        width: 100% !important;
+        max-width: 620px !important;
+        margin-top: 18px !important;
+        display: flex !important;
+        justify-content: center !important;
+        gap: 12px !important;
+    }
+
+    .button-container button {
+        flex: 1 1 0 !important;
+        justify-content: center !important;
+        min-height: 44px !important;
+        padding: 12px 14px !important;
+        font-size: 0.92rem !important;
+        border-radius: 999px !important;
+    }
+
+    .news-gallery {
+        width: 100% !important;
+        max-width: 620px !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .a4-box {
+        width: min(92vw, 420px) !important;
+        height: auto !important;
+        aspect-ratio: 210 / 297 !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+    }
+
+    .a4-box img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .download-container {
+        margin-top: 14px !important;
+    }
+
+    .download-link {
+        min-height: 44px !important;
+        padding: 12px 18px !important;
+        border-radius: 999px !important;
+        font-size: 0.92rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .news-page {
+        padding: 22px 10px 38px !important;
+    }
+
+    .news-card {
+        padding: 10px !important;
+        border-radius: 16px !important;
+    }
+
+    .news-text {
+        padding: 14px !important;
+    }
+
+    .button-container {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .button-container button {
+        width: 100% !important;
+    }
+
+    .a4-box {
+        width: 94vw !important;
     }
 }

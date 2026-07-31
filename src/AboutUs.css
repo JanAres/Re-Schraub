@@ -1,166 +1,2181 @@
-
-.about {
-    background-color: #ffffff;
-    padding: 60px 20px;
-    font-family: 'Anton', sans-serif;
-    color: #000;
-    justify-content: flex-start;
+.about-experience {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    background: #f5f5f5;
 }
 
-
-
-
-.about-container {
-    position: relative; /* Initialisiert relative Platzierung für Kinder */
-    width: 100vw; /* Nimmt die gesamte Breite des Viewports ein */
-    height: 100vh; /* Nimmt die gesamte Höhe des Viewports ein */
-    max-width: initial; /* Hebt die max-width-Einschränkung auf */
-    background: transparent; /* Falls dies explizit gewünscht ist */
-    margin: 0; /* Kein äußerer Rand */
-    padding: 50px 100px;
+.about-screen {
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    scroll-snap-align: start;
+    overflow: hidden;
 }
 
-.full-width-banner {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    height: 400px;
-    background-image: url("./img/Background.JPG");
-    background-size: cover;
-    background-position: center;
-    margin-top: 20px;
-    margin-bottom: 60px;
-    z-index: 0;
+/* ---------------- HERO / SEITE 1 ---------------- */
+
+.hero-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+            radial-gradient(circle at center, rgba(110, 195, 255, 0.08) 0%, rgba(110, 195, 255, 0) 45%),
+            linear-gradient(180deg, #f9f9f9 0%, #f2f2f2 100%);
+}
+
+.hero-center {
+    text-align: center;
+    padding: 24px;
+    width: min(1100px, 92vw);
     position: relative;
 }
 
-
-
-
-.intro-section {
-    text-align: center;
-    margin-bottom: 30px;
-    width: 80%;
-    margin: 0 auto;
-    font-weight: bold;
-    font-family: 'Anton', sans-serif;
-
+.hero-brand {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", "Arial Narrow", Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(68px, 11vw, 168px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    color: #0f1720;
+    transition: color 0.35s ease, text-shadow 0.35s ease;
 }
 
-.intro-section h1 {
-    font-size: 50px;
-    margin-bottom: 20px;
-    justify-content: flex-start;
-    font-family: 'Anton', sans-serif;
-    font-weight: bold;
-
+.hero-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(24px) scale(0.94);
+    transition:
+            opacity 0.28s ease,
+            transform 0.28s ease,
+            color 0.35s ease,
+            text-shadow 0.35s ease;
 }
 
-.intro-section p {
-    font-size: 24px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    margin: 0 auto;
+.hero-letter.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
-
-.sections-row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 40px;
-    margin-bottom: 40px;
+.hero-brand.is-blue .hero-letter {
+    color: #005798;
+    text-shadow:
+            0 0 10px rgba(103, 191, 255, 0.18),
+            0 0 24px rgba(103, 191, 255, 0.1);
 }
 
-
-.about-section {
-    flex: 1;
-    background: transparent;
-    padding: 50px 50px;
-    margin: 0 auto;
-    margin-top: 20px;
-    font-size: 3rem;
-
-
+.hero-brand.is-glow .hero-letter {
+    color: #6ec3ff;
+    text-shadow:
+            0 0 12px rgba(110, 195, 255, 0.62),
+            0 0 28px rgba(110, 195, 255, 0.28);
 }
 
-.about-section h2 {
-    color: #000b88;
-    font-size: 30px;
-    margin-bottom: 12px;
-    text-align: left;
+.hero-falling-screw {
+    position: absolute;
+    left: calc(100% + 34px);
+    top: -180px;
+    width: clamp(44px, 4.4vw, 68px);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.58);
 }
 
-.about-section p {
-    font-size: 20px;
-    line-height: 1.6;
-    margin-bottom: 16px;
-    text-align: left;
+.hero-falling-screw.is-dropped {
+    opacity: 1;
+    animation: heroFallingScrewDrop 0.9s cubic-bezier(0.18, 0.88, 0.2, 1) forwards;
 }
 
-
-.image-container-small {
-    margin-top: 12px;
-   
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.image-container-small img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.hero-falling-screw-image {
     display: block;
+    width: 100%;
+    height: auto;
+    filter:
+            drop-shadow(0 0 10px rgba(103, 191, 255, 0.22))
+            drop-shadow(0 8px 18px rgba(0, 87, 152, 0.14));
 }
 
-
-@media (max-width: 992px) {
-    .sections-row {
-        display: block;
+@keyframes heroFallingScrewDrop {
+    0% {
+        top: -180px;
+        transform: scale(0.58);
     }
 
-    .about-section {
-        margin-bottom: 40px;
+    55% {
+        top: 8px;
+        transform: scale(0.86);
+    }
+
+    100% {
+        top: 34px;
+        transform: scale(1.14);
     }
 }
 
+/* ---------------- HERO GROUPS ---------------- */
 
-.image-gallery {
+.hero-groups-showcase {
+    width: min(1080px, 92vw);
+    margin: 34px auto 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    grid-gap: 20px;
-    margin-top: 100px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px 26px;
+    align-items: start;
+    justify-items: center;
 }
 
-.NavLink{
-    font-size: 5rem;
+.hero-groups-showcase--paged {
+    min-height: 130px;
+    transition:
+            transform 0.32s ease,
+            opacity 0.32s ease,
+            filter 0.32s ease;
+    will-change: transform, opacity;
 }
 
-.gallery-item {
-    width: 100%;
+.hero-groups-showcase--paged.is-settled {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+}
 
-    height: 180px;
+.hero-groups-showcase--paged.is-swiping {
+    opacity: 0.18;
+    transform: translateX(42px);
+    filter: blur(3px);
+}
+
+.hero-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    min-height: 108px;
+    opacity: 0.98;
+}
+
+.hero-group-icon-ring {
+    position: relative;
+    width: 66px;
+    height: 66px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+}
+
+.hero-group-icon-ring::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+.hero-group-icon-inner {
+    color: #005798;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heroIconSwapIn 0.28s ease;
+}
+
+.hero-group-name {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.12;
+    font-weight: 800;
+    text-align: center;
+    color: #0f1720;
+    letter-spacing: 0.01em;
+    max-width: 320px;
+}
+
+.hero-group-name-text {
+    display: inline-block;
+}
+
+.hero-group-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    will-change: transform, opacity;
+}
+
+.hero-group-letter.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.hero-group-letter.is-space {
+    width: 0.3em;
+}
+
+@keyframes heroIconSwapIn {
+    from {
+        opacity: 0;
+        transform: scale(0.78);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ---------------- HERO INLINE INFO ---------------- */
+
+.hero-inline-info-row {
+    width: min(1380px, 94vw);
+    margin: 34px auto 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 34px;
+    align-items: start;
+}
+
+.hero-inline-info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hero-inline-info-headline {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: #005798;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: clamp(24px, 2vw, 34px);
+    font-weight: 900;
+    line-height: 1.15;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.22s ease, transform 0.22s ease, opacity 0.22s ease;
+}
+
+.hero-inline-info-headline:hover {
+    color: #0072c5;
+    transform: translateY(-2px);
+}
+
+.hero-inline-info-headline.is-open {
+    color: #003f6d;
+}
+
+.hero-inline-info-text {
+    max-width: 420px;
+    max-height: 0;
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+            max-height 0.42s ease,
+            opacity 0.28s ease,
+            transform 0.28s ease,
+            margin-top 0.28s ease;
+    margin-top: 0;
+    text-align: center;
 }
 
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.hero-inline-info-text.is-open {
+    max-height: 220px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 14px;
+}
+
+.hero-inline-info-text p {
+    margin: 0;
+    color: #16202b;
+    font-size: 18px;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+}
+
+.hero-inline-contact-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #005798;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.hero-inline-contact-link:hover {
+    text-decoration: underline;
+}
+
+/* ---------------- SCROLL BUTTON ---------------- */
+
+.scroll-outline-button {
+    margin: 36px auto 0 auto;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
     display: block;
 }
 
+.scroll-outline-button.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-@media (max-width: 480px) {
-    .image-container-small {
-        height: 150px;
+.scroll-circle {
+    width: 68px;
+    height: 68px;
+    border: 1.6px solid rgba(0, 87, 152, 0.22);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: transparent;
+}
+
+.scroll-circle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 1.8px solid #005798;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1.2s linear;
+}
+
+.scroll-arrow {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.scroll-arrow::before,
+.scroll-arrow::after {
+    content: "";
+    position: absolute;
+    background: rgba(0, 87, 152, 0.24);
+    transition: background 1.2s linear;
+}
+
+.scroll-arrow::before {
+    width: 2px;
+    height: 16px;
+    left: 6px;
+    top: -1px;
+}
+
+.scroll-arrow::after {
+    width: 10px;
+    height: 10px;
+    left: 2px;
+    top: 6px;
+    border-right: 2px solid rgba(0, 87, 152, 0.24);
+    border-bottom: 2px solid rgba(0, 87, 152, 0.24);
+    background: transparent;
+    transform: rotate(45deg);
+    transition:
+            border-color 1.2s linear,
+            background 1.2s linear;
+}
+
+.scroll-outline-button.is-charged .scroll-circle::before {
+    clip-path: inset(0 0 0 0);
+}
+
+.scroll-outline-button.is-charged .scroll-arrow::before {
+    background: #005798;
+}
+
+.scroll-outline-button.is-charged .scroll-arrow::after {
+    border-color: #005798;
+}
+
+/* ---------------- STORY / SEITE 2 NUR ANIMATION ---------------- */
+
+.story-screen {
+    background:
+            radial-gradient(circle at 82% 18%, rgba(110, 195, 255, 0.16) 0%, rgba(110, 195, 255, 0) 36%),
+            linear-gradient(180deg, #f7f7f7 0%, #f4f6f8 100%);
+}
+
+.story-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.story-top-zone {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.story-horizontal-trail,
+.story-vertical-trail {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.story-horizontal-trail {
+    left: 10%;
+    top: 50%;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(
+            90deg,
+            rgba(0, 87, 152, 0.05),
+            rgba(0, 162, 255, 0.65),
+            rgba(110, 195, 255, 0.95)
+    );
+    box-shadow: 0 0 18px rgba(110, 195, 255, 0.28);
+}
+
+.story-vertical-trail {
+    left: 82%;
+    top: 50%;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(
+            180deg,
+            rgba(110, 195, 255, 0.95),
+            rgba(0, 162, 255, 0.55),
+            rgba(0, 87, 152, 0.05)
+    );
+    box-shadow: 0 0 18px rgba(110, 195, 255, 0.22);
+}
+
+.story-stage.is-started .story-horizontal-trail {
+    opacity: 1;
+    animation: storyGrowHorizontal 2.2s linear forwards;
+}
+
+.story-stage.is-started .story-vertical-trail {
+    opacity: 1;
+    animation: storyGrowVertical 1s linear forwards;
+    animation-delay: 2.2s;
+}
+
+.story-runner {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: clamp(52px, 6vw, 88px);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.story-stage.is-started .story-runner {
+    opacity: 1;
+    animation:
+            storyRunnerHorizontal 2.2s linear forwards,
+            storyRunnerVertical 1s linear forwards 2.2s;
+}
+
+.story-runner-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter:
+            drop-shadow(0 0 12px rgba(110, 195, 255, 0.28))
+            drop-shadow(0 8px 18px rgba(0, 87, 152, 0.12));
+}
+
+.story-title-wrap {
+    position: absolute;
+    top: 36%;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    width: 100vw;
+    text-align: center;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.story-title {
+    margin: 0 auto;
+    width: min(860px, 86vw);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(54px, 9vw, 130px);
+    color: #005798;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translate3d(-115vw, 0, 0);
+    will-change: transform, opacity;
+}
+
+.story-title-motion--enter-left .story-title {
+    opacity: 0;
+    transform: translate3d(-115vw, 0, 0);
+}
+
+.story-title-motion--enter-right .story-title {
+    opacity: 0;
+    transform: translate3d(115vw, 0, 0);
+}
+
+.story-title-motion--visible .story-title {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+            transform 0.72s cubic-bezier(0.16, 0.9, 0.18, 1),
+            opacity 0.32s ease;
+}
+
+.story-title-motion--exit-right .story-title {
+    opacity: 0;
+    transform: translate3d(115vw, 0, 0);
+    transition:
+            transform 0.46s cubic-bezier(0.64, 0, 0.78, 0),
+            opacity 0.28s ease;
+}
+
+.story-title-motion--exit-left .story-title {
+    opacity: 0;
+    transform: translate3d(-115vw, 0, 0);
+    transition:
+            transform 0.46s cubic-bezier(0.64, 0, 0.78, 0),
+            opacity 0.28s ease;
+}
+
+.story-stage.is-pulsed .story-title {
+    text-shadow:
+            0 0 14px rgba(110, 195, 255, 0.38),
+            0 0 34px rgba(0, 87, 152, 0.18);
+}
+
+/* ---------------- KEYFRAMES ---------------- */
+
+@keyframes storyGrowHorizontal {
+    from {
+        width: 0;
     }
-    .gallery-item {
-        height: 120px;
+
+    to {
+        width: 72%;
+    }
+}
+
+@keyframes storyGrowVertical {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 32%;
+    }
+}
+
+@keyframes storyRunnerHorizontal {
+    from {
+        left: 10%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        left: 82%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(12deg);
+    }
+}
+
+@keyframes storyRunnerVertical {
+    from {
+        left: 82%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(12deg);
+    }
+
+    to {
+        left: 82%;
+        top: 82%;
+        transform: translate(-50%, -50%) rotate(96deg);
+    }
+}
+
+
+/* ---------------- MOBILE ---------------- */
+
+
+
+
+
+@media (max-width: 900px) {
+    .hero-center {
+        width: min(760px, 92vw);
+    }
+
+    .hero-groups-showcase {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        min-height: 300px;
+    }
+
+
+
+
+    .hero-inline-info-row {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 24px;
+    }
+
+    .hero-inline-info-headline {
+        font-size: clamp(22px, 6vw, 30px);
+    }
+
+    .hero-inline-info-text p {
+        font-size: 16px;
+    }
+
+    .story-horizontal-trail {
+        left: 8%;
+        top: 52%;
+    }
+
+    .story-vertical-trail {
+        left: 82%;
+        top: 52%;
+    }
+
+    .story-runner {
+        left: 8%;
+        top: 52%;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero-brand {
+        font-size: clamp(54px, 16vw, 86px);
+    }
+
+    .hero-falling-screw {
+        left: 50%;
+        transform: translateX(-50%) scale(0.58);
+    }
+
+    .scroll-circle {
+        width: 58px;
+        height: 58px;
+    }
+
+    .story-title {
+        font-size: clamp(48px, 16vw, 78px);
+    }
+}
+
+
+/* Schrauben-Icons unter RE-Schraub */
+
+.hero-group-icon-inner--screw {
+    width: 42px;
+    height: 42px;
+}
+
+.hero-group-screw-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter:
+            drop-shadow(0 0 8px rgba(110, 195, 255, 0.28))
+            drop-shadow(0 6px 12px rgba(0, 87, 152, 0.12));
+    animation: heroScrewIconPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes heroScrewIconPulse {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.08) rotate(4deg);
+    }
+}
+
+
+/* ---------------- STORY INFO CARDS / SEITE 2 ---------------- */
+
+.story-info-row {
+    position: absolute;
+    left: 50%;
+    bottom: 9vh;
+    transform: translateX(-50%) translateY(22px);
+    width: min(1180px, 92vw);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    opacity: 0;
+    transition:
+            opacity 0.55s ease,
+            transform 0.55s ease;
+    z-index: 4;
+}
+
+.story-info-row.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition-delay: 1.4s;
+}
+
+.story-info-item {
+    min-height: 118px;
+    padding: 26px 24px;
+    box-sizing: border-box;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(0, 87, 152, 0.13);
+    box-shadow: 0 18px 44px rgba(15, 23, 32, 0.08);
+    backdrop-filter: blur(12px);
+    text-align: center;
+}
+
+.story-info-headline {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: #005798;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: clamp(21px, 1.8vw, 30px);
+    font-weight: 900;
+    line-height: 1.16;
+    text-align: center;
+    cursor: pointer;
+    transition:
+            color 0.22s ease,
+            transform 0.22s ease;
+}
+
+.story-info-headline:hover,
+.story-info-headline.is-open {
+    color: #003f6d;
+    transform: translateY(-2px);
+}
+
+.story-info-text {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-top: 0;
+    transform: translateY(-6px);
+    transition:
+            max-height 0.42s ease,
+            opacity 0.28s ease,
+            transform 0.28s ease,
+            margin-top 0.28s ease;
+}
+
+.story-info-text.is-open {
+    max-height: 220px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 14px;
+}
+
+.story-info-text p {
+    margin: 0;
+    color: #16202b;
+    font-size: 16px;
+    line-height: 1.55;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+}
+
+.story-info-contact-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #005798;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.story-info-contact-link:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 900px) {
+    .story-info-row {
+        bottom: 5vh;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        width: min(680px, 90vw);
+    }
+
+    .story-info-item {
+        min-height: auto;
+        padding: 18px 20px;
+    }
+
+    .story-info-text p {
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================================
+   ABOUTUS STORY PAGE — CONTENT TO TOP + BOXES ALWAYS OPEN
+   - Seite 2 Inhalt sitzt oben statt unten
+   - 3 Info-Boxen sind dauerhaft ausgeklappt
+   - keine Toggle-Collapse-Höhe mehr
+   GANZ UNTEN IN AboutUs.css lassen
+========================================================= */
+
+.story-screen {
+    overflow: hidden !important;
+}
+
+/* Stage bleibt fullscreen, Content wird nach oben gezogen */
+.story-stage,
+.story-top-zone {
+    min-height: 100vh !important;
+    height: 100vh !important;
+}
+
+/* Trail/Runner etwas höher, damit oben mehr Energie ist */
+.story-horizontal-trail {
+    top: 36% !important;
+}
+
+.story-vertical-trail {
+    top: 36% !important;
+}
+
+.story-runner {
+    top: 36% !important;
+}
+
+/* Titel deutlich höher platzieren */
+.story-title-wrap {
+    top: clamp(82px, 12vh, 132px) !important;
+}
+
+/* Info-Content direkt unter dem Titel, nicht mehr unten */
+.story-info-row {
+    top: clamp(245px, 34vh, 340px) !important;
+    bottom: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+    width: min(1280px, 94vw) !important;
+    gap: clamp(20px, 2.4vw, 32px) !important;
+    opacity: 1 !important;
+    align-items: stretch !important;
+}
+
+/* sichtbar sobald Story da ist, ohne spätes Hochfahren von unten */
+.story-info-row.is-visible {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+    transition-delay: 0.25s !important;
+}
+
+/* Boxen größer/ordentlicher, weil Content immer sichtbar ist */
+.story-info-item {
+    min-height: clamp(245px, 28vh, 340px) !important;
+    padding: clamp(24px, 2.6vw, 36px) clamp(22px, 2.4vw, 32px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+/* Headline ist jetzt kein Button mehr */
+.story-info-headline,
+.story-info-headline--static {
+    display: block !important;
+    margin: 0 !important;
+    cursor: default !important;
+    transform: none !important;
+    color: #005798 !important;
+    font-size: clamp(23px, 1.95vw, 34px) !important;
+}
+
+.story-info-headline:hover,
+.story-info-headline.is-open,
+.story-info-headline--static:hover {
+    color: #005798 !important;
+    transform: none !important;
+}
+
+/* Alle Texte immer aufgeklappt */
+.story-info-text,
+.story-info-text.is-open,
+.story-info-text--always-open {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    margin-top: 16px !important;
+    transform: translateY(0) !important;
+}
+
+.story-info-text p {
+    font-size: clamp(16px, 1.08vw, 18px) !important;
+    line-height: 1.62 !important;
+}
+
+/* Mobile: Content oben und scrollbar, falls 3 geöffnete Boxen zu hoch werden */
+@media (max-width: 900px) {
+    .story-screen {
+        overflow-y: auto !important;
+    }
+
+    .story-stage,
+    .story-top-zone {
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
+    .story-title-wrap {
+        top: 86px !important;
+    }
+
+    .story-info-row {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: min(680px, 92vw) !important;
+        margin: 220px auto 44px !important;
+        grid-template-columns: 1fr !important;
+        opacity: 1 !important;
+    }
+
+    .story-info-row.is-visible {
+        transform: none !important;
+    }
+
+    .story-info-item {
+        min-height: auto !important;
+        padding: 22px 20px !important;
+    }
+
+    .story-horizontal-trail {
+        top: 34% !important;
+    }
+
+    .story-vertical-trail {
+        top: 34% !important;
+    }
+
+    .story-runner {
+        top: 34% !important;
+    }
+}
+
+
+
+/* =========================================================
+   ABOUTUS STORY PAGE — NO LINE/SCREW + LETTER WRITE TEXT
+   - Linie und Schraube im zweiten Screen komplett ausblenden
+   - Headlines fliegen wie der Titel von links rein
+   - Texte werden buchstabenweise geschrieben
+   - der jeweils entstehende Buchstabe leuchtet kurz hellblau
+   GANZ UNTEN IN AboutUs.css lassen
+========================================================= */
+
+/* Linie / Route / Schraube / Runner komplett raus */
+.story-horizontal-trail,
+.story-vertical-trail,
+.story-runner,
+.story-route,
+.story-route-line,
+.story-screw,
+.story-screw-runner,
+.story-runner-dot,
+.story-runner-icon,
+.story-runner-logo {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Content nach oben behalten, ohne Platz für die Linie */
+.story-title-wrap {
+    top: clamp(70px, 10vh, 112px) !important;
+}
+
+.story-info-row {
+    top: clamp(220px, 30vh, 310px) !important;
+    bottom: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+    width: min(1320px, 94vw) !important;
+    gap: clamp(20px, 2.4vw, 32px) !important;
+    align-items: stretch !important;
+}
+
+/* Cards warten nicht mehr auf Runner */
+.story-info-row,
+.story-info-row.is-visible {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+
+/* Boxen bleiben offen */
+.story-info-item {
+    overflow: hidden !important;
+    min-height: clamp(270px, 30vh, 365px) !important;
+}
+
+/* Headline kommt je Punkt vor dem Text von links rein */
+.story-info-headline--static {
+    opacity: 0;
+    transform: translate3d(-72px, 0, 0);
+    animation: storyHeadlineFlyIn 0.62s cubic-bezier(0.16, 0.9, 0.18, 1) forwards;
+    animation-delay: var(--headline-delay, 0ms);
+    will-change: transform, opacity, filter;
+}
+
+@keyframes storyHeadlineFlyIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(-92px, 0, 0);
+        filter: blur(2px);
+    }
+    72% {
+        opacity: 1;
+        transform: translate3d(5px, 0, 0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+    }
+}
+
+/* Text-Container immer offen, aber Buchstaben selbst schreiben sich */
+.story-info-text,
+.story-info-text.is-open,
+.story-info-text--always-open {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    margin-top: 16px !important;
+    transform: none !important;
+}
+
+.story-letter-text {
+    margin: 0 !important;
+    color: #22384b !important;
+    font-size: clamp(16px, 1.08vw, 18px) !important;
+    line-height: 1.66 !important;
+    font-weight: 650 !important;
+}
+
+/* Jeder Buchstabe wird nacheinander sichtbar */
+.story-letter {
+    opacity: 0;
+    display: inline;
+    color: #22384b;
+    text-shadow: none;
+    animation-name: storyLetterWriteGlow;
+    animation-duration: 0.74s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 34ms));
+    will-change: opacity, color, text-shadow, filter;
+}
+
+.story-letter--space {
+    display: inline;
+}
+
+/* Entstehender Buchstabe leuchtet kurz hellblau, danach normale Lesefarbe */
+@keyframes storyLetterWriteGlow {
+    0% {
+        opacity: 0;
+        color: #67c8ff;
+        text-shadow:
+                0 0 0 rgba(103, 200, 255, 0),
+                0 0 0 rgba(0, 87, 152, 0);
+        filter: blur(2px);
+    }
+    28% {
+        opacity: 1;
+        color: #8cdbff;
+        text-shadow:
+                0 0 10px rgba(103, 200, 255, 0.92),
+                0 0 22px rgba(0, 87, 152, 0.42);
+        filter: blur(0);
+    }
+    62% {
+        opacity: 1;
+        color: #005798;
+        text-shadow:
+                0 0 7px rgba(103, 200, 255, 0.42),
+                0 0 14px rgba(0, 87, 152, 0.18);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        color: #22384b;
+        text-shadow: none;
+        filter: blur(0);
+    }
+}
+
+/* Kontaktlink erst nach zweitem Text anzeigen */
+.story-info-contact-link {
+    opacity: 0;
+    animation: storyContactLinkFadeIn 0.5s ease forwards;
+    animation-delay: 4200ms;
+}
+
+@keyframes storyContactLinkFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 900px) {
+    .story-title-wrap {
+        top: 74px !important;
+    }
+
+    .story-info-row {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: min(680px, 92vw) !important;
+        margin: 205px auto 44px !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .story-info-item {
+        min-height: auto !important;
+    }
+
+    .story-letter {
+        animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 25ms));
+    }
+}
+
+
+
+/* =========================================================
+   ABOUTUS STORY PAGE — LEFT TO RIGHT BLOCK SEQUENCE
+   - Reihenfolge links -> mitte -> rechts
+   - kompletter linker Block schreibt zuerst
+   - danach kompletter mittlerer
+   - danach kompletter rechter
+   - Titel jedes Blocks fliegt zuerst von links ein
+   - Buchstaben-Schritt lesbar, aber etwas flüssiger
+========================================================= */
+
+.story-info-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+}
+
+.story-info-item {
+    min-height: clamp(300px, 33vh, 390px) !important;
+}
+
+/* Headline-Animation etwas klarer */
+.story-info-headline--static {
+    opacity: 0;
+    transform: translate3d(-84px, 0, 0);
+    animation: storyHeadlineFlyInSequential 0.62s cubic-bezier(0.16, 0.9, 0.18, 1) forwards;
+    animation-delay: var(--headline-delay, 0ms);
+}
+
+@keyframes storyHeadlineFlyInSequential {
+    0% {
+        opacity: 0;
+        transform: translate3d(-96px, 0, 0);
+        filter: blur(2px);
+    }
+    74% {
+        opacity: 1;
+        transform: translate3d(5px, 0, 0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+    }
+}
+
+.story-letter-text {
+    margin: 0 !important;
+}
+
+.story-letter {
+    opacity: 0;
+    display: inline;
+    color: #22384b;
+    animation-name: storyLetterWriteGlowSequential;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 22ms));
+}
+
+.story-letter--space {
+    display: inline;
+}
+
+@keyframes storyLetterWriteGlowSequential {
+    0% {
+        opacity: 0;
+        color: #79d5ff;
+        text-shadow: 0 0 0 rgba(121, 213, 255, 0);
+        filter: blur(2px);
+    }
+    26% {
+        opacity: 1;
+        color: #a2e6ff;
+        text-shadow:
+                0 0 10px rgba(121, 213, 255, 0.95),
+                0 0 24px rgba(0, 87, 152, 0.34);
+        filter: blur(0);
+    }
+    58% {
+        opacity: 1;
+        color: #005798;
+        text-shadow:
+                0 0 7px rgba(121, 213, 255, 0.42),
+                0 0 14px rgba(0, 87, 152, 0.14);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        color: #22384b;
+        text-shadow: none;
+        filter: blur(0);
+    }
+}
+
+/* Kontaktlink erscheint passend am Ende des rechten Blocks */
+.story-info-contact-link {
+    opacity: 0;
+    animation: storyContactLinkFadeInSequential 0.42s ease forwards;
+    animation-delay: var(--contact-link-delay, 0ms);
+}
+
+@keyframes storyContactLinkFadeInSequential {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .story-info-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .story-letter {
+        animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 18ms));
+    }
+}
+
+
+
+/* =========================================================
+   ABOUTUS STORY PAGE — INVISIBLE BOXES + FULL TEXT + FASTER WRITE
+   GANZ UNTEN IN AboutUs.css lassen
+========================================================= */
+
+.story-screen {
+    background:
+            radial-gradient(circle at 82% 18%, rgba(110, 195, 255, 0.10) 0%, rgba(110, 195, 255, 0) 36%),
+            linear-gradient(180deg, #f7f7f7 0%, #f4f6f8 100%) !important;
+    overflow: hidden !important;
+}
+
+.story-info-row {
+    top: clamp(205px, 28vh, 288px) !important;
+    bottom: auto !important;
+    width: min(1460px, 95vw) !important;
+    gap: clamp(24px, 3vw, 52px) !important;
+    align-items: start !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+
+.story-info-row.is-visible {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+
+.story-info-item {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: 0 !important;
+    padding: 0 clamp(4px, 0.7vw, 10px) !important;
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+.story-info-item::before,
+.story-info-item::after {
+    display: none !important;
+    content: none !important;
+}
+
+.story-info-text,
+.story-info-text.is-open,
+.story-info-text--always-open {
+    max-height: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    margin-top: clamp(14px, 1.5vw, 22px) !important;
+    padding: 0 !important;
+    transform: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.story-letter-text,
+.story-info-text p {
+    display: block !important;
+    width: 100% !important;
+    max-width: 440px !important;
+    margin: 0 auto !important;
+    color: #182636 !important;
+    font-size: clamp(17px, 1.08vw, 19px) !important;
+    line-height: 1.72 !important;
+    font-weight: 650 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow: visible !important;
+}
+
+.story-letter {
+    opacity: 0;
+    display: inline;
+    color: #22384b;
+    animation-name: storyLetterWriteGlowFastReadable !important;
+    animation-duration: 0.46s !important;
+    animation-timing-function: ease-out !important;
+    animation-fill-mode: forwards !important;
+    animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 14ms)) !important;
+    will-change: opacity, color, text-shadow, filter;
+}
+
+.story-letter--space {
+    display: inline;
+}
+
+@keyframes storyLetterWriteGlowFastReadable {
+    0% {
+        opacity: 0;
+        color: #7bd7ff;
+        text-shadow: 0 0 0 rgba(121, 213, 255, 0);
+        filter: blur(1.6px);
+    }
+
+    24% {
+        opacity: 1;
+        color: #b8efff;
+        text-shadow:
+                0 0 9px rgba(121, 213, 255, 0.9),
+                0 0 20px rgba(0, 87, 152, 0.3);
+        filter: blur(0);
+    }
+
+    52% {
+        opacity: 1;
+        color: #005798;
+        text-shadow:
+                0 0 5px rgba(121, 213, 255, 0.34),
+                0 0 12px rgba(0, 87, 152, 0.12);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        color: #182636;
+        text-shadow: none;
+        filter: blur(0);
+    }
+}
+
+.story-info-headline,
+.story-info-headline--static {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    color: #005798 !important;
+    font-size: clamp(25px, 2vw, 36px) !important;
+    line-height: 1.12 !important;
+    font-weight: 950 !important;
+    text-align: center !important;
+    cursor: default !important;
+    animation-duration: 0.52s !important;
+}
+
+.story-info-contact-link {
+    opacity: 0;
+    margin-top: 14px !important;
+    animation: storyContactLinkFadeInSequential 0.34s ease forwards !important;
+    animation-delay: var(--contact-link-delay, 0ms) !important;
+}
+
+.story-info-row *,
+.story-info-item * {
+    box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+    .story-info-row {
+        top: clamp(190px, 26vh, 260px) !important;
+        gap: 24px !important;
+    }
+
+    .story-letter-text,
+    .story-info-text p {
+        max-width: 360px !important;
+        font-size: clamp(15.5px, 1.25vw, 17px) !important;
+        line-height: 1.62 !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .story-screen {
+        overflow-y: auto !important;
+    }
+
+    .story-info-row {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        width: min(680px, 92vw) !important;
+        margin: 205px auto 54px !important;
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+        transform: none !important;
+    }
+
+    .story-info-row.is-visible {
+        transform: none !important;
+    }
+
+    .story-info-item {
+        padding: 0 !important;
+    }
+
+    .story-letter-text,
+    .story-info-text p {
+        max-width: 620px !important;
+        font-size: 16px !important;
+        line-height: 1.62 !important;
+    }
+
+    .story-letter {
+        animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 11ms)) !important;
+    }
+}
+
+
+
+/* =========================================================
+   ABOUTUS STORY PAGE — CLEAN TEXT FORMATION FIX
+   - verhindert Überlagerung der 3 Texte
+   - jeder Block bekommt klare Breite
+   - mittlerer Titel wird sauber zweizeilig
+   - Text läuft normal lesbar, nicht in andere Spalten
+   GANZ UNTEN IN AboutUs.css lassen
+========================================================= */
+
+/* Mehr Platz zwischen Haupttitel und drei Punkten */
+.story-title-wrap {
+    top: clamp(88px, 12vh, 128px) !important;
+}
+
+/* Die drei Blöcke tiefer und mit echter Spaltenlogik */
+.story-info-row {
+    top: clamp(330px, 42vh, 390px) !important;
+    width: min(1420px, 92vw) !important;
+    display: grid !important;
+    grid-template-columns: minmax(310px, 1fr) minmax(340px, 1fr) minmax(310px, 1fr) !important;
+    gap: clamp(46px, 5vw, 92px) !important;
+    align-items: start !important;
+    justify-items: center !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+
+/* Jeder Punkt wird ein eigener sauberer Textbereich */
+.story-info-item {
+    width: 100% !important;
+    max-width: 390px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    overflow: visible !important;
+}
+
+/* Überschriften: nicht mehr in den Text drücken */
+.story-info-headline,
+.story-info-headline--static {
+    display: block !important;
+    width: 100% !important;
+    max-width: 390px !important;
+    margin: 0 auto clamp(22px, 2.2vh, 32px) !important;
+    padding: 0 !important;
+    font-size: clamp(27px, 2.05vw, 38px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.025em !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+}
+
+/* Textblock: fixe les aktuellen Überlappungen */
+.story-info-text,
+.story-info-text.is-open,
+.story-info-text--always-open {
+    width: 100% !important;
+    max-width: 390px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    text-align: center !important;
+}
+
+/* Der geschriebene Text bekommt richtige Absatzbreite */
+.story-letter-text,
+.story-info-text p {
+    display: block !important;
+    width: 100% !important;
+    max-width: 390px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    font-size: clamp(16px, 0.98vw, 18px) !important;
+    line-height: 1.62 !important;
+    font-weight: 650 !important;
+    letter-spacing: -0.005em !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: auto !important;
+}
+
+/* Wichtig für die Letter-Spans: normale Zeilenumbrüche erlauben */
+.story-letter {
+    display: inline !important;
+    white-space: normal !important;
+}
+
+/* Kontakt-Link sauber unter den rechten Text */
+.story-info-contact-link {
+    display: inline-flex !important;
+    width: fit-content !important;
+    margin: clamp(16px, 1.8vh, 24px) auto 0 !important;
+    justify-content: center !important;
+}
+
+/* Bei mittleren Screens eher 3 Spalten behalten, aber kompakter */
+@media (max-width: 1280px) {
+    .story-info-row {
+        top: clamp(320px, 41vh, 380px) !important;
+        width: min(1180px, 94vw) !important;
+        grid-template-columns: repeat(3, minmax(260px, 1fr)) !important;
+        gap: clamp(28px, 3.4vw, 52px) !important;
+    }
+
+    .story-info-item,
+    .story-info-headline,
+    .story-info-headline--static,
+    .story-info-text,
+    .story-info-text.is-open,
+    .story-info-text--always-open,
+    .story-letter-text,
+    .story-info-text p {
+        max-width: 330px !important;
+    }
+
+    .story-info-headline,
+    .story-info-headline--static {
+        font-size: clamp(23px, 2vw, 32px) !important;
+    }
+
+    .story-letter-text,
+    .story-info-text p {
+        font-size: clamp(14.5px, 1.1vw, 16.5px) !important;
+        line-height: 1.58 !important;
+    }
+}
+
+/* Mobile/tablet: untereinander, damit nie etwas überlappt */
+@media (max-width: 900px) {
+    .story-screen {
+        overflow-y: auto !important;
+    }
+
+    .story-title-wrap {
+        top: 82px !important;
+    }
+
+    .story-info-row {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: min(680px, 92vw) !important;
+        margin: 260px auto 60px !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 46px !important;
+        transform: none !important;
+    }
+
+    .story-info-row.is-visible {
+        transform: none !important;
+    }
+
+    .story-info-item,
+    .story-info-headline,
+    .story-info-headline--static,
+    .story-info-text,
+    .story-info-text.is-open,
+    .story-info-text--always-open,
+    .story-letter-text,
+    .story-info-text p {
+        max-width: 620px !important;
+    }
+
+    .story-info-headline,
+    .story-info-headline--static {
+        margin-bottom: 16px !important;
+        font-size: clamp(26px, 7vw, 36px) !important;
+    }
+
+    .story-letter-text,
+    .story-info-text p {
+        font-size: 16px !important;
+        line-height: 1.62 !important;
+    }
+}
+
+
+/* =========================================================
+   ABOUT US HERO — REAL SCREW SHOWCASE
+   Ersetzt die wandernden Gruppen unter dem Titel.
+========================================================= */
+
+.about-screw-showcase {
+    width: min(1260px, 94vw);
+    margin: 34px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.about-screw-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 124px;
+    border-radius: 26px;
+    background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.24) 100%);
+    border: 1px solid rgba(110, 195, 255, 0.22);
+    box-shadow:
+            0 14px 34px rgba(8, 42, 78, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.about-screw-marquee--1 {
+    min-height: 126px;
+}
+
+.about-screw-marquee--2 {
+    min-height: 134px;
+}
+
+.about-screw-track {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 14px 22px;
+    animation: aboutScrewTrackLeft 34s linear infinite;
+    will-change: transform;
+}
+
+.about-screw-marquee--2 .about-screw-track {
+    animation-name: aboutScrewTrackRight;
+    animation-duration: 38s;
+}
+
+.about-screw-item {
+    width: 96px;
+    height: 96px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(var(--screw-tilt, 0deg)) scale(var(--screw-scale, 1));
+    animation: aboutScrewFloat 5.6s ease-in-out infinite;
+    animation-delay: var(--screw-float-delay, 0s);
+    filter: drop-shadow(0 10px 18px rgba(7, 35, 66, 0.16));
+}
+
+.about-screw-marquee--2 .about-screw-item {
+    width: 108px;
+    height: 108px;
+}
+
+.about-screw-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.about-screw-marquee-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 86px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.about-screw-marquee-fade--left {
+    left: 0;
+    background: linear-gradient(90deg, rgba(245, 247, 250, 0.98) 0%, rgba(245, 247, 250, 0) 100%);
+}
+
+.about-screw-marquee-fade--right {
+    right: 0;
+    background: linear-gradient(270deg, rgba(245, 247, 250, 0.98) 0%, rgba(245, 247, 250, 0) 100%);
+}
+
+@keyframes aboutScrewTrackLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 11px)); }
+}
+
+@keyframes aboutScrewTrackRight {
+    from { transform: translateX(calc(-50% - 11px)); }
+    to { transform: translateX(0); }
+}
+
+@keyframes aboutScrewFloat {
+    0%, 100% { transform: rotate(var(--screw-tilt, 0deg)) translateY(0) scale(var(--screw-scale, 1)); }
+    50% { transform: rotate(calc(var(--screw-tilt, 0deg) * 0.72)) translateY(-8px) scale(calc(var(--screw-scale, 1) + 0.03)); }
+}
+
+@media (max-width: 980px) {
+    .about-screw-showcase {
+        width: min(94vw, 980px);
+        gap: 14px;
+    }
+
+    .about-screw-marquee,
+    .about-screw-marquee--1,
+    .about-screw-marquee--2 {
+        min-height: 112px;
+    }
+
+    .about-screw-item {
+        width: 82px;
+        height: 82px;
+        gap: 16px;
+    }
+
+    .about-screw-marquee--2 .about-screw-item {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-screw-showcase {
+        margin-top: 24px;
+    }
+
+    .about-screw-marquee-fade {
+        width: 42px;
+    }
+
+    .about-screw-track {
+        gap: 14px;
+        padding: 10px 14px;
+        animation-duration: 22s;
+    }
+
+    .about-screw-marquee--2 .about-screw-track {
+        animation-duration: 24s;
+    }
+
+    .about-screw-item {
+        width: 66px;
+        height: 66px;
+    }
+
+    .about-screw-marquee--2 .about-screw-item {
+        width: 72px;
+        height: 72px;
+    }
+}
+
+
+/* =========================================================
+   ABOUTUS — MOBILE LAYOUT FINAL FIX
+   Ganz unten in AboutUs.css einfügen
+   Fix:
+   - Productbar / Schrauben-Marquee komplett entfernen
+   - Hero auf Mobile sauber zentrieren
+   - Story-Seite Mobile ohne Überlappung
+   - "Über Uns" liegt nicht mehr auf den Texten
+========================================================= */
+
+/* Productbar unter dem Logo komplett entfernen — Desktop + Mobile */
+.about-screw-showcase,
+.about-screw-marquee,
+.about-screw-track,
+.about-screw-item,
+.about-screw-image,
+.about-screw-marquee-fade {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Da die Bar weg ist, Hero kompakter ausrichten */
+.hero-center {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+    html,
+    body {
+        overflow-x: hidden !important;
+    }
+
+    .about-experience {
+        height: 100dvh !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        scroll-snap-type: y proximity !important;
+        background: #f7f9fb !important;
+    }
+
+    .about-screen {
+        width: 100% !important;
+        min-height: 100dvh !important;
+        height: auto !important;
+        overflow: visible !important;
+        scroll-snap-align: start !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ---------------- Seite 1 / Hero ---------------- */
+
+    .hero-screen {
+        min-height: 100dvh !important;
+        height: auto !important;
+        padding: 92px 14px 72px !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    .hero-center {
+        width: 100% !important;
+        max-width: 94vw !important;
+        min-height: calc(100dvh - 164px) !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        gap: 26px !important;
+        text-align: center !important;
+    }
+
+    .hero-brand {
+        font-size: clamp(48px, 16vw, 82px) !important;
+        line-height: 0.92 !important;
+        letter-spacing: -0.045em !important;
+        max-width: 96vw !important;
+        overflow-wrap: normal !important;
+        white-space: nowrap !important;
+        margin: 0 auto !important;
+        transform: translateY(-8px) !important;
+    }
+
+    .hero-falling-screw {
+        left: 50% !important;
+        top: -132px !important;
+        width: clamp(42px, 13vw, 62px) !important;
+        transform: translateX(-50%) scale(0.58) !important;
+    }
+
+    .hero-falling-screw.is-dropped {
+        animation: heroFallingScrewDropMobile 0.9s cubic-bezier(0.18, 0.88, 0.2, 1) forwards !important;
+    }
+
+    @keyframes heroFallingScrewDropMobile {
+        0% {
+            top: -132px;
+            transform: translateX(-50%) scale(0.58);
+            opacity: 0;
+        }
+
+        58% {
+            top: -56px;
+            transform: translateX(-50%) scale(0.86);
+            opacity: 1;
+        }
+
+        100% {
+            top: -38px;
+            transform: translateX(-50%) scale(1.04);
+            opacity: 1;
+        }
+    }
+
+    .scroll-outline-button {
+        margin-top: 8px !important;
+    }
+
+    .scroll-circle {
+        width: 58px !important;
+        height: 58px !important;
+    }
+
+    /* ---------------- Seite 2 / Story ---------------- */
+
+    .story-screen {
+        min-height: 100dvh !important;
+        height: auto !important;
+        padding: 86px 14px 72px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        background:
+                radial-gradient(circle at 50% 12%, rgba(110, 195, 255, 0.13) 0%, rgba(110, 195, 255, 0) 42%),
+                linear-gradient(180deg, #f7f7f7 0%, #f4f6f8 100%) !important;
+    }
+
+    .story-stage,
+    .story-top-zone {
+        position: relative !important;
+        width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Alle Linien/Runner bleiben weg */
+    .story-horizontal-trail,
+    .story-vertical-trail,
+    .story-runner,
+    .story-runner-logo {
+        display: none !important;
+    }
+
+    /* Titel normal im Flow platzieren, nicht absolut über Text */
+    .story-title-wrap {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        margin: 0 auto 42px !important;
+        text-align: center !important;
+        z-index: 4 !important;
+        overflow: visible !important;
+    }
+
+    .story-title {
+        width: 100% !important;
+        max-width: 94vw !important;
+        font-size: clamp(54px, 18vw, 86px) !important;
+        line-height: 0.9 !important;
+        letter-spacing: -0.055em !important;
+        white-space: nowrap !important;
+        margin: 0 auto !important;
+    }
+
+    /* Info-Blöcke sauber untereinander, kein absoluter Desktop-Layer */
+    .story-info-row,
+    .story-info-row.is-visible {
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: min(620px, 92vw) !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 46px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: 5 !important;
+    }
+
+    .story-info-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        text-align: center !important;
+    }
+
+    .story-info-headline,
+    .story-info-headline--static {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 14px !important;
+        padding: 0 !important;
+        font-size: clamp(25px, 7.6vw, 36px) !important;
+        line-height: 1.05 !important;
+        letter-spacing: -0.035em !important;
+        text-align: center !important;
+        color: #005798 !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+    }
+
+    .story-info-text,
+    .story-info-text.is-open,
+    .story-info-text--always-open {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .story-letter-text,
+    .story-info-text p {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        font-size: clamp(15px, 4.25vw, 17px) !important;
+        line-height: 1.52 !important;
+        font-weight: 650 !important;
+        letter-spacing: -0.01em !important;
+        text-align: center !important;
+        color: #16202b !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+
+    .story-letter {
+        display: inline !important;
+        white-space: normal !important;
+        animation-delay: calc(var(--story-text-delay, 0ms) + (var(--letter-index) * 7ms)) !important;
+    }
+
+    .story-info-contact-link {
+        display: inline-flex !important;
+        margin: 16px auto 0 !important;
+        justify-content: center !important;
+    }
+}
+
+/* Sehr kleine Phones */
+@media (max-width: 420px) {
+    .hero-screen {
+        padding-top: 82px !important;
+    }
+
+    .hero-brand {
+        font-size: clamp(42px, 15.5vw, 64px) !important;
+    }
+
+    .story-screen {
+        padding-top: 78px !important;
+    }
+
+    .story-title {
+        font-size: clamp(48px, 17vw, 68px) !important;
+    }
+
+    .story-info-row,
+    .story-info-row.is-visible {
+        width: 91vw !important;
+        gap: 42px !important;
+    }
+
+    .story-info-headline,
+    .story-info-headline--static {
+        font-size: clamp(24px, 7.4vw, 32px) !important;
+    }
+
+    .story-letter-text,
+    .story-info-text p {
+        font-size: 15px !important;
+        line-height: 1.48 !important;
     }
 }

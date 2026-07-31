@@ -7,7 +7,8 @@ const translations = {
             about: "Über Uns",
             news: "Aktuelles",
             info: "Info",
-            stock: "Impressum",
+            newsletter: "Newsletter",
+            stock: "Downloads",
             contact: "Kontakt"
         },
         footer: {
@@ -28,9 +29,9 @@ const translations = {
         about: {
             title: "Über Uns",
             section1:
-                "Seit über 46 Jahren sind wir als inhabergeführtes Familienunternehmen Ihr zuverlässiger Ansprechpartner für hochwertige Befestigungslösungen im Holz- und Baustofffachhandel.",
+                "Wir sind seit 1979 die Spezialisten für Befestigungstechnik aus Recklinghausen mit einem breiten Angebot an Spezialbefestigungen und zählen zu den innovativsten Unternehmen der Branche.",
             section2:
-                "Unsere Geschichte begann mit einer einfachen Idee: Produkte mit Köpfchen zu entwickeln, die nicht nur funktional, sondern auch innovativ sind. Diese Philosophie prägt unser Handeln bis heute.",
+                "Das Unternehmen wird in zweiter Generation weitergeführt. Die lachende Schraube mit dem Slogan \"Befestigungssysteme mit Köpfchen\" stellt unser Markenzeichen dar. Unsere Terrassenschrauben, das Terrassenzubehör, sowie die DIN- und Normteile sind mittlerweile weltweit bekannt und sind ein Synonym für Qualität aus dem Ruhrgebiet.",
             section3Title: "Unser Anspruch",
             section3:
                 "Qualität, Flexibilität und Kundennähe stehen bei uns im Mittelpunkt. Wir entwickeln unsere Schrauben mit Blick auf die Anforderungen der Praxis – immer CE-zertifiziert und unter ständiger Kontrolle.",
@@ -45,8 +46,17 @@ const translations = {
             company: "RE-Schraub GmbH",
             addressLine1: "Auerstr. 2",
             addressLine2: "45663 Recklinghausen",
-            contact:
-                "Fon: 02361 71035 | Fax: 02361 71034 | Mail: info@re-schraub.eu"
+            phoneLabel: "Fon:",
+            phone: "02361 71035",
+            faxLabel: "Fax:",
+            fax: "02361 71034",
+            emailLabel: "Mail:",
+            email: "info@re-schraub.eu"
+        },
+
+
+        download: {
+            title: "Downloads",
         },
         impressum: {
             title: "Impressum",
@@ -113,39 +123,55 @@ const translations = {
             title: "Aktuelles & News",
             prev: "‹ Vorherige",
             next: "Nächste ›",
+            download: "PDF herunterladen",
             items: [
                 {
-                    title: "Plattenbauschraube",
+                    title: "Terrassofix",
                     desc:
-                        "Unsere neue Plattenbauschraube ist ab sofort im Katalog erhältlich. Entdecken Sie die Vorteile dieser vielseitigen Schraube!",
+                        "Garten und Terrassenzubehör!",
                     points: [
-                        " Gelb verzinkt mit besonderer Beschichtung",
-                        " Kleinster Wendelkopf für feinste Ergebnisse",
-                        " Ideal für HPL und vollverzinkte Oberflächen"
+                        "Holzterrassen erfreuen sich immer größerer Beliebtheit. Doch nicht nur\n" +
+                        "die Qualität des Holzes ist wichtig, auch die Wahl der richtigen Schraube\n" +
+                        "und des Zubehörs."
                     ],
-                    img: "/img/HPL Fassade.jpg"
+                    img: "/img/img_2.png",
+                    downloadLink: "/pdf/EH_ReSchraub_2025_L.pdf",
+                    downloadFileName: "EH_ReSchraub_2025_L.pdf"
                 },
                 {
-                    title: "Eindrehwerkzeug",
+                    title: "Fassadofix",
                     desc:
-                        "Das innovative Eindrehwerkzeug ermöglicht eine besonders einfache Montage. Seine revolutionäre Technik macht Schrauben noch effizienter.",
+                        "",
                     points: [
-                        " Dacromat beschichtet für Feuchtigkeitsschutz",
-                        " Senkkopf passt in Wände mit einem Durchmesser von 11 mm",
-                        " Kein Dübel erforderlich bei Vollziegeln oder Beton"
+                        "1. Fassadofix® für Holz, zur sichtbaren Verschraubung von Fassadenprofilen/Rhombusleisten aus Holz,\n" +
+                        "4 x 45/50/60 mm, auch in schwarz (Sonderfarben auf Anfrage), Edelstahl A2, Senkkopf mit Flansch,\n" +
+                        "Innenvielzahn, Teilgewinde, Fräsrippen, Bohrspitze",
+                        " 2. Fassadofix® für Faserzement, Fassadenschraube mit Bohrspitze für Faserzement, 5,5 x 50 mm,\n" +
+                        "div. Farben lieferbar*, V4A, Innenvielzahn, Bohrspitze, kopflackiert, erhöhte UV-Beständigkeit",
+                        " 3. Fassadofix® für HPL, für die Befestigung von HPL Platten an Fassaden und Dachüberständen auf\n" +
+                        "Holzunterkonstruktion, 5,5 x 25/35/45/55/65 mm, div. Farben lieferbar, Edelstahl A4, Innenvielzahn,\n" +
+                        "kopflackiert, erhöhte UV-Beständigkeit",
+                        " 4. Fassadofix® Fassadenband, Schutz der Fassadenunterkonstruktion vor Nässe und Bildung\n" +
+                        "einer Schattenfuge, selbstklebend und nicht selbstklebend erhältlich, 70 x 110 mm, Rolle à 20 m"
                     ],
-                    img: "/img/Gr. Nr. 2686_5.JPG"
+                    img: "/img/img_3.png",
+                    downloadLink: "/pdf/EH_ReSchraub_2025_L.pdf",
+                    downloadFileName: "EH_ReSchraub_2025_L.pdf"
                 },
                 {
-                    title: "Fachmesse in Köln",
+                    title: "Katalog",
                     desc:
-                        "Wir sind auf der Fachmesse in Köln und stellen unsere neuesten Produkte vor. Kommen Sie vorbei und überzeugen Sie sich selbst.",
+                        "Wir liefern Ihnen Innovationen aus dem Ruhrgebiet von Profis für Profis –\n" +
+                        "ganz egal ob Sie Handwerker oder Heimwerker sind – Bei uns finden Sie\n" +
+                        "immer die richtige Lösung für Ihr Projekt.",
                     points: [
-                        " Highlights unserer innovativen Befestigungen",
-                        " Neue Materialien für professionelle Nutzer",
-                        " Messestand: Halle 4, Stand C19"
+                        " QUALITÄT",
+                        " KOMPETENZ",
+                        " SERVICE"
                     ],
-                    img: "/img/Schraube1.webp"
+                    img: "/img/img_4.png",
+                    downloadLink: "/pdf/RE-Schraub Katalog ohne Preise.pdf",
+                    downloadFileName: "RE-Schraub Katalog ohne Preise.pdf"
                 }
             ]
         },
@@ -175,7 +201,7 @@ const translations = {
             about: "About Us",
             news: "News",
             info: "Info",
-            stock: "Imprint",
+            stock: "Downloads",
             contact: "Contact"
         },
         footer: {
@@ -191,6 +217,11 @@ const translations = {
         home: {
             welcome:
                 "Welcome to RE-Schraub GmbH – the specialist for fastening systems from the Ruhr area in its second generation",
+            subtitle2:
+                "Unter den Downloads finden Sie unterstützende Verkaufshilfen, sowie die Leistungserklärungen unserer CE-zertifizierten Artikel.",
+            subtitle3:
+                "Wir bringen regelmäßig neue und innovative Produkte auf den Markt und sind stets der Partner für den Fachhandel. Unsere Kunden schätzen die Qualität unserer Produkte seit nunmehr 46 Jahren.\n" +
+                "subtitle2",
             subtitle:
                 "On the following pages you will find helpful and useful information about our company as well as our products. Under Downloads you will find supporting sales aids as well as the performance declarations of our CE-certified items. We regularly launch new and innovative products on the market and are always the partner for the specialist trade. Our customers have appreciated the quality of our products for 46 years."
         },
@@ -214,8 +245,12 @@ const translations = {
             company: "RE-Schraub GmbH",
             addressLine1: "Auerstr. 2",
             addressLine2: "45663 Recklinghausen",
-            contact:
-                "Phone: +49 2361 71035 | Fax: +49 2361 71034 | Mail: info@re-schraub.eu"
+            phoneLabel: "Phone:",
+            phone: "+49 2361 71035",
+            faxLabel: "Fax:",
+            fax: "+49 2361 71034",
+            emailLabel: "Mail:",
+            email: "info@re-schraub.eu"
         },
         impressum: {
             title: "Imprint",
@@ -284,37 +319,40 @@ const translations = {
             next: "Next ›",
             items: [
                 {
-                    title: "Panel Screw",
-                    desc:
-                        "Our new panel screw is now available in the catalog. Discover the advantages of this versatile screw!",
+                    title: "Terrassofix",
+                    desc: "Garden and terrace accessories!",
                     points: [
-                        " Yellow zinc-plated with special coating",
-                        " Smallest thread head for finest results",
-                        " Ideal for HPL and fully galvanized surfaces"
+                        "Wooden terraces are becoming increasingly popular. But not only the quality of the wood is important, the choice of the right screw and accessories is crucial."
                     ],
-                    img: "/img/HPL Fassade.jpg"
+                    img: "/img/img_2.png",
+                    downloadLink: "/pdf/EH_ReSchraub_2025_L.pdf",
+                    downloadFileName: "EH_ReSchraub_2025_L.pdf"
+
                 },
                 {
-                    title: "Drilling Tool",
-                    desc:
-                        "The innovative drilling tool allows for particularly easy installation. Its revolutionary technology makes screws even more efficient.",
+                    title: "Fassadofix",
+                    desc: "",
                     points: [
-                        " Dacromat-coated for moisture protection",
-                        " Countersunk head fits walls with an 11 mm diameter",
-                        " No anchor required for solid brick or concrete"
+                        "1. Fassadofix® for wood, for the visible fastening of wooden façade profiles/rhombus battens, 4 × 45/50/60 mm (also available in black; special colors on request), stainless steel A2, countersunk head with flange, internal Torx, partial thread, milling ribs, drill tip",
+                        "2. Fassadofix® for fiber cement, façade screw with drill tip for fiber cement, 5.5 × 50 mm, various colors available*, V4A stainless steel, internal Torx, drill tip, head coated, increased UV resistance",
+                        "3. Fassadofix® for HPL, for the attachment of HPL panels on façades and roof overhangs to a wooden substructure, 5.5 × 25/35/45/55/65 mm, various colors available, stainless steel A4, internal Torx, head coated, increased UV resistance",
+                        "4. Fassadofix® façade tape, protects the façade substructure from moisture and prevents the formation of a shadow gap, available in self-adhesive and non-adhesive versions, 70 × 110 mm, roll of 20 m"
                     ],
-                    img: "/img/Gr. Nr. 2686_5.JPG"
+                    img: "/img/img_4.png",
+                    downloadLink: "/pdf/EH_ReSchraub_2025_L.pdf",
+                    downloadFileName: "EH_ReSchraub_2025_L.pdf"
                 },
                 {
-                    title: "Trade Fair in Cologne",
-                    desc:
-                        "We are at the trade fair in Cologne showcasing our latest products. Visit us and see for yourself.",
+                    title: "Catalog",
+                    desc: "We deliver innovations from the Ruhr region by professionals for professionals –\nwhether you are a tradesperson or a DIY enthusiast – with us you will always find\nthe right solution for your project.",
                     points: [
-                        " Highlights of our innovative fastening solutions",
-                        " New materials for professional users",
-                        " Booth: Hall 4, Stand C19"
+                        "QUALITY",
+                        "COMPETENCE",
+                        "SERVICE"
                     ],
-                    img: "/img/Schraube1.webp"
+                    img: "/img/img.png",
+                    downloadLink: "/pdf/Katalog_ReSchraub_2025_FINAL_oPreise_HiRes.pdf",
+                    downloadFileName: "RE-Schraub Katalog ohne Preise.pdf"
                 }
             ]
         },

@@ -1,38 +1,54 @@
-// src/App.jsx
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
+import useIsMobile from "./components/useIsMobile";
 
-import Navbar from "./components/Header.jsx";
-import ScrollToTop from "./components/ScrollToTop.jsx";
-import Info from "./pages/Info.jsx";
-import Home from "./pages/Home.jsx";
-import Products from "./pages/Products.jsx";
-import News from "./pages/News.jsx";
-import Contact from "./pages/Contact.jsx";
-import Impressum from "./pages/Impressum.jsx";
-import AboutUs from "./pages/AboutUs.jsx";
-import Footer from "./pages/Footer.jsx";
+import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
+import Info from "./pages/Info";
+import AboutUs from "./pages/AboutUs";
+import Products from "./pages/Products";
+import News from "./pages/News";
+import Contact from "./pages/Contact";
+import Newsletter from "./Newsletter.jsx";
+import Impressum from "./pages/Impressum";
+import Footer from "./pages/Footer";
+
+function AppContent() {
+    const isMobile = useIsMobile(768);
+    const location = useLocation();
+
+    const isAboutPage =
+        location.pathname === "/" || location.pathname === "/about-us";
+
+    return (
+        <div className="app-container">
+            <Navbar animateBuild={isAboutPage} />
+            <ScrollToTop />
+
+            {!isMobile && <Info />}
+
+            <main className="app-main">
+                <Routes>
+                    <Route path="/" element={<AboutUs />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/news" element={<News />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/newsletter" element={<Newsletter />} />
+                    <Route path="/impressum" element={<Impressum />} />
+                </Routes>
+            </main>
+
+            <Footer />
+        </div>
+    );
+}
 
 function App() {
     return (
         <LanguageProvider>
-            {/** ScrollToTop muss hier stehen – und darf nicht außerhalb eines Routers liegen. */}
-            <ScrollToTop />
-
-            <Navbar />
-            <Info />
-
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/impressum" element={<Impressum />} />
-                <Route path="/about-us" element={<AboutUs />} />
-            </Routes>
-
-            <Footer />
+            <AppContent />
         </LanguageProvider>
     );
 }

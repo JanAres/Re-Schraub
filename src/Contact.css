@@ -1,202 +1,804 @@
-.contact{
-    background: #ffffff;
-    min-height: 100vh;
-    padding-bottom: 10px;
-
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
 }
 
+:root {
+    --contact-blue: #005798;
+    --contact-blue-dark: #004a82;
+    --contact-ink: #111820;
+    --contact-text: #405160;
+    --contact-muted: #667789;
+    --contact-line: rgba(15, 23, 32, 0.11);
+    --contact-soft-line: rgba(15, 23, 32, 0.08);
+    --contact-bg: #f5f7f9;
+    --contact-card: #ffffff;
+    --contact-shadow: 0 18px 48px rgba(15, 23, 32, 0.08);
+    --contact-shadow-hover: 0 22px 58px rgba(15, 23, 32, 0.11);
+}
 
+.contact-page {
+    min-height: calc(100vh - 90px);
+    padding: clamp(42px, 6vw, 86px) 20px clamp(56px, 7vw, 96px);
+    box-sizing: border-box;
+    background: var(--contact-bg);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
 
-
-.contact-container {
-    max-width: 900px;
-    margin: 10px auto;
-    padding: 20px;
+.contact-shell {
+    width: min(1120px, 94vw);
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    background-color: transparent;
-
+    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 520px);
+    gap: clamp(28px, 4.8vw, 58px);
+    align-items: start;
 }
 
-.company-info {
-    font-size: 16px;
-    font-family: 'Anton', sans-serif;
-    line-height: 1.7;
+.contact-content {
+    min-width: 0;
 }
 
-.company-info a {
-    color: #ffffff;
-    text-decoration: none;
+.contact-kicker {
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: 16px;
+    color: var(--contact-blue);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
 }
 
-.company-info a:hover {
-    text-decoration: underline;
+.contact-content h1 {
+    max-width: 800px;
+    margin: 0;
+    color: var(--contact-ink);
+    font-size: clamp(40px, 5.6vw, 74px);
+    line-height: 0.98;
+    font-weight: 850;
+    letter-spacing: -0.045em;
 }
 
-.note {
-    margin-top: 20px;
-    font-style: italic;
-    font-family: 'Anton', sans-serif;
-    color: #444;
+.contact-lead {
+    max-width: 700px;
+    margin: 22px 0 0;
+    color: var(--contact-text);
+    font-size: clamp(17px, 1.55vw, 20px);
+    line-height: 1.62;
 }
 
-.contact-form {
+.contact-company-card {
+    width: min(640px, 100%);
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    box-sizing: border-box;
+    border-radius: 18px;
+    background: var(--contact-card);
+    border: 1px solid var(--contact-line);
+    box-shadow: var(--contact-shadow);
+}
+
+.contact-company-card img {
+    width: 76px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid var(--contact-soft-line);
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.contact-company-card span,
+.contact-info-link span,
+.contact-section-head span {
+    color: var(--contact-blue);
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.contact-company-card strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--contact-ink);
+    font-size: clamp(20px, 2vw, 27px);
+    line-height: 1.16;
+    font-weight: 850;
+    letter-spacing: -0.025em;
+}
+
+.contact-company-card p {
+    margin: 8px 0 0;
+    color: var(--contact-muted);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.contact-info-list {
+    width: min(640px, 100%);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.contact-info-link {
+    min-height: 82px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 17px 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid var(--contact-line);
+    color: var(--contact-ink);
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(15, 23, 32, 0.06);
+    transition:
+            transform 0.18s ease,
+            border-color 0.18s ease,
+            box-shadow 0.18s ease;
 }
 
-.contact-form input,
-.contact-form textarea {
-    margin-bottom: 15px;
-    padding: 10px;
+.contact-info-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 87, 152, 0.24);
+    box-shadow: 0 18px 40px rgba(15, 23, 32, 0.09);
+}
+
+.contact-info-link strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.contact-legal-card,
+.contact-form-card {
+    background: var(--contact-card);
+    border: 1px solid var(--contact-line);
+    border-radius: 20px;
+    box-shadow: var(--contact-shadow);
+}
+
+.contact-legal-card {
+    width: min(640px, 100%);
+    margin-top: 22px;
+    padding: clamp(22px, 2.6vw, 30px);
+    box-sizing: border-box;
+}
+
+.contact-section-head {
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--contact-soft-line);
+}
+
+.contact-section-head h2 {
+    margin: 8px 0 0;
+    color: var(--contact-ink);
+    font-size: clamp(25px, 2.5vw, 34px);
+    line-height: 1.12;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+}
+
+.contact-form-head p {
+    margin: 9px 0 0;
+    color: var(--contact-muted);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.contact-legal-scroll {
+    max-height: 390px;
+    overflow: auto;
+    padding-right: 12px;
+    color: var(--contact-text);
+    line-height: 1.65;
+    scrollbar-width: thin;
+    scrollbar-color: #b8c7d6 transparent;
+}
+
+.contact-legal-scroll h3 {
+    margin: 24px 0 8px;
+    color: var(--contact-ink);
     font-size: 16px;
-    font-family: 'Anton', sans-serif;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    font-weight: 850;
 }
 
-
-
-.calendar-btn {
-    background: #2f7ed8;
-    margin-top: 10px;
+.contact-legal-scroll h3:first-child {
+    margin-top: 4px;
 }
 
-@media (max-width: 768px) {
-    .contact-container {
+.contact-legal-scroll p {
+    margin: 0 0 11px;
+    white-space: pre-line;
+    color: #344456;
+    font-size: 14.5px;
+}
+
+.contact-form-card {
+    position: sticky;
+    top: 108px;
+    padding: clamp(24px, 3vw, 34px);
+    box-sizing: border-box;
+}
+
+.contact-topic-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-topic-tabs button {
+    border: 1px solid var(--contact-line);
+    border-radius: 11px;
+    background: #ffffff;
+    color: var(--contact-text);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 13px 14px;
+    transition:
+            background 0.18s ease,
+            color 0.18s ease,
+            border-color 0.18s ease,
+            box-shadow 0.18s ease;
+}
+
+.contact-topic-tabs button:hover,
+.contact-topic-tabs button.is-active {
+    background: var(--contact-blue);
+    color: #ffffff;
+    border-color: var(--contact-blue);
+    box-shadow: 0 12px 24px rgba(0, 87, 152, 0.18);
+}
+
+.contact-field-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.contact-field-row--small-second {
+    grid-template-columns: 0.82fr 1.18fr;
+}
+
+.contact-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.contact-field label {
+    margin: 14px 0 7px;
+    color: var(--contact-ink);
+    font-size: 13.5px;
+    font-weight: 800;
+}
+
+.contact-date-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 10px;
+}
+
+.contact-input,
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cfd9e3;
+    border-radius: 11px;
+    background: #ffffff;
+    color: var(--contact-ink);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: 15.5px;
+    padding: 13px 14px;
+    outline: none;
+    transition:
+            border-color 0.16s ease,
+            box-shadow 0.16s ease,
+            color 0.16s ease,
+            background 0.16s ease;
+}
+
+.contact-field textarea {
+    resize: vertical;
+    min-height: 128px;
+}
+
+.contact-input:focus,
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+    border-color: var(--contact-blue);
+    box-shadow: 0 0 0 3px rgba(0, 87, 152, 0.1);
+}
+
+.contact-input--completed,
+.contact-input--completed::placeholder {
+    color: var(--contact-blue) !important;
+    font-weight: 750;
+}
+
+.contact-input--completed {
+    border-color: rgba(0, 87, 152, 0.42) !important;
+    background: #f7fbfe !important;
+}
+
+.contact-check-grid,
+.contact-job-panel {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.contact-check {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    align-items: start;
+    gap: 11px;
+    padding: 13px 14px;
+    border-radius: 11px;
+    background: #f8fafc;
+    border: 1px solid #e1e8ef;
+    color: var(--contact-text);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.contact-check input {
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+    accent-color: var(--contact-blue);
+}
+
+.contact-submit,
+.contact-calendar-btn {
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 850;
+    padding: 15px 18px;
+    transition:
+            transform 0.18s ease,
+            box-shadow 0.18s ease,
+            opacity 0.18s ease,
+            background 0.18s ease;
+}
+
+.contact-submit {
+    width: 100%;
+    margin-top: 22px;
+    border: 1px solid var(--contact-blue);
+    background: var(--contact-blue);
+    color: #ffffff;
+    box-shadow: 0 12px 24px rgba(0, 87, 152, 0.2);
+}
+
+.contact-calendar-btn {
+    width: 100%;
+    margin-top: 11px;
+    background: #ffffff;
+    color: var(--contact-blue);
+    border: 1px solid rgba(0, 87, 152, 0.28);
+    box-shadow: 0 8px 18px rgba(0, 87, 152, 0.08);
+}
+
+.contact-submit:hover:not(:disabled),
+.contact-calendar-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(0, 87, 152, 0.23);
+}
+
+.contact-submit:hover:not(:disabled) {
+    background: var(--contact-blue-dark);
+    border-color: var(--contact-blue-dark);
+}
+
+.contact-submit:disabled {
+    opacity: 0.72;
+    cursor: not-allowed;
+}
+
+.contact-status {
+    margin: 15px 0 0;
+    border-radius: 11px;
+    padding: 12px 14px;
+    font-weight: 750;
+    line-height: 1.45;
+    font-size: 14px;
+}
+
+.contact-status--success {
+    background: #eaf7ef;
+    color: #166534;
+    border: 1px solid #bfe7cd;
+}
+
+.contact-status--error {
+    background: #fff1f1;
+    color: #991b1b;
+    border: 1px solid #f2c7c7;
+}
+
+@media (max-width: 1060px) {
+    .contact-shell {
         grid-template-columns: 1fr;
+    }
+
+    .contact-content,
+    .contact-form-card,
+    .contact-legal-card,
+    .contact-company-card,
+    .contact-info-list {
+        max-width: 780px;
+        width: 100%;
+        justify-self: center;
+    }
+
+    .contact-form-card {
+        position: relative;
+        top: auto;
     }
 }
 
-.contact-header {
-    text-align: center;
-    color: white;
-    font-size: 3rem;
-    font-family: 'Anton', sans-serif;
-    font-weight: bold;
+@media (max-width: 640px) {
+    .contact-page {
+        padding: 34px 14px 58px;
+    }
+
+    .contact-field-row,
+    .contact-field-row--small-second,
+    .contact-date-grid,
+    .contact-info-list,
+    .contact-topic-tabs {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-company-card {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-company-card,
+    .contact-info-link,
+    .contact-form-card,
+    .contact-legal-card {
+        border-radius: 16px;
+    }
 }
 
-.form-wrapper {
-    display: flex;
-    flex-direction: column;
-}
+/* FlyTitle Integration Kontakt */
 
-.contact-topic-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    background: rgb(255, 255, 255);
-    color: #000000;
-}
-
-.full-width-banner {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    height: 400px;
-    background-image: url("./img/Background.JPG");
-    background-size: cover;
-    background-position: center;
-    margin-top: 20px;
-    margin-bottom: 60px;
-    z-index: 0;
+.contact-page {
     position: relative;
+    padding-top: clamp(150px, 18vh, 190px);
+    overflow: hidden;
 }
 
-.contact-container {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    display: flex;
-    gap: 40px;
-    background-color: transparent;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+.contact-page .page-fly-title {
+    top: clamp(30px, 4vh, 46px);
+    z-index: 60;
 }
 
-.contact-sidebar {
-    position: sticky;
-    top: 100px;
-    width: 300px;
-    background: #003366;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    height: fit-content;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+/* Echter h1 bleibt für Screenreader/SEO, visuell übernimmt PageFlyTitle */
+.contact-hero h1,
+#contact-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+/* =========================================================
+   CONTACT INTEGRATED INPUT UPDATE
+   - Kontaktformular bekommt denselben langen, eingebetteten Input-Stil
+   - Beim Tippen schwarz, nach Blur blau
+   - Card wirkt weniger nach Papierformular
+   GANZ UNTEN IN Contact.css lassen
+========================================================= */
+
+.contact-page {
+    background:
+            radial-gradient(circle at 9% 17%, rgba(0, 87, 152, 0.13), transparent 28%),
+            radial-gradient(circle at 88% 18%, rgba(103, 191, 255, 0.2), transparent 32%),
+            linear-gradient(135deg, #f6f9fc 0%, #ffffff 48%, #eef6fb 100%) !important;
+    overflow-x: hidden !important;
 }
 
-.contact-sidebar a {
-    color: #aad8ff;
+.contact-shell {
+    width: min(1260px, 95vw) !important;
+    grid-template-columns: minmax(0, 0.82fr) minmax(520px, 720px) !important;
+    gap: clamp(34px, 4.8vw, 72px) !important;
 }
 
-.contact-form-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Weniger Papierkarte, mehr integrierte Glasfläche */
+.contact-form-card {
+    position: sticky !important;
+    top: 112px !important;
+    padding: clamp(22px, 3vw, 34px) !important;
+    border: 0 !important;
+    border-radius: 34px !important;
+    background:
+            linear-gradient(135deg, rgba(255,255,255,0.48), rgba(255,255,255,0.18)) !important;
+    box-shadow:
+            0 28px 90px rgba(15, 23, 32, 0.09),
+            inset 0 1px 0 rgba(255,255,255,0.7) !important;
+    backdrop-filter: blur(10px) saturate(1.06) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(1.06) !important;
 }
 
-
-
-.contact-form {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
+/* Tabs passend zu den neuen Inputs */
+.contact-topic-tabs {
+    gap: 14px !important;
 }
 
-.contact-topic-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    justify-content: center;
-    color: #000000;
-    font-size: 3rem;
-    font-weight: bold;
-    font-family: 'Anton', sans-serif;
+.contact-topic-tabs button {
+    min-height: 52px !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,0.74) !important;
+    border-color: rgba(0, 87, 152, 0.16) !important;
 }
 
-.contact-topic-buttons button {
-    background: #ffffff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    border-bottom: 5px solid #00028f;
-    font-size: 3rem;
-    font-family: 'Anton', sans-serif;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    color: #000000;
-    font-weight: bold;
+.contact-topic-tabs button.is-active,
+.contact-topic-tabs button:hover {
+    background: linear-gradient(135deg, #005798, #2385c5) !important;
+    border-color: transparent !important;
+    color: #fff !important;
 }
 
-.contact-form label {
-    margin: 10px 0 5px;
-    font-weight: 500;
-    font-family: 'Anton', sans-serif;
+/* längere Kontaktfelder */
+.contact-field-row,
+.contact-field-row--small-second,
+.contact-date-grid {
+    gap: clamp(16px, 2vw, 24px) !important;
 }
 
-
-.contact-topic-buttons button:hover {
-    transform: scale(2.02);
+.contact-field label {
+    margin: 14px 0 8px !important;
+    padding-left: 6px !important;
+    color: #12324a !important;
+    font-size: 13px !important;
+    font-weight: 950 !important;
 }
 
-
-.contact-topic-buttons button {
-    background: #ffffff;
-    border: none;
-    color: #000000;
-    padding: 10px 14px;
-    font-size: 3rem;
-    font-family: 'Anton', sans-serif;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    font-weight: bold;
-    border-bottom: 5px solid #00028f;
+/* Grundzustand: schwarz */
+.contact-input,
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    border: 1px solid rgba(0, 87, 152, 0.2) !important;
+    border-radius: 999px !important;
+    background:
+            linear-gradient(135deg, rgba(255,255,255,0.88), rgba(244,251,255,0.72)) !important;
+    color: #101923 !important;
+    caret-color: #101923 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    padding: 16px 22px !important;
+    min-height: 56px !important;
+    box-shadow:
+            0 16px 38px rgba(8, 36, 66, 0.065),
+            inset 0 1px 0 rgba(255,255,255,0.86) !important;
+    backdrop-filter: blur(12px) saturate(1.06) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.06) !important;
 }
 
+/* Textarea bleibt angenehmer, aber gleicher Stil */
+.contact-field textarea {
+    border-radius: 26px !important;
+    min-height: 150px !important;
+    resize: vertical !important;
+    line-height: 1.45 !important;
+}
 
+/* Beim Tippen/Fokus schwarz */
+.contact-input:focus,
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus,
+.contact-input.contact-input--completed:focus,
+.contact-field input.contact-input--completed:focus,
+.contact-field select.contact-input--completed:focus,
+.contact-field textarea.contact-input--completed:focus {
+    color: #101923 !important;
+    caret-color: #101923 !important;
+    border-color: rgba(0, 87, 152, 0.66) !important;
+    background: rgba(255,255,255,0.96) !important;
+    box-shadow:
+            0 0 0 5px rgba(0,87,152,0.11),
+            0 18px 42px rgba(0,87,152,0.13),
+            inset 0 1px 0 rgba(255,255,255,0.95) !important;
+    outline: none !important;
+}
 
+/* Nach Wechsel/Blur blau */
+.contact-input--completed:not(:focus),
+.contact-input--completed:not(:focus)::placeholder {
+    color: var(--contact-blue) !important;
+    caret-color: var(--contact-blue) !important;
+    font-weight: 900 !important;
+}
+
+.contact-input--completed:not(:focus) {
+    border-color: rgba(0, 87, 152, 0.58) !important;
+    background:
+            linear-gradient(135deg, rgba(255,255,255,0.97), rgba(225,246,255,0.9)) !important;
+    box-shadow:
+            0 0 0 4px rgba(0,87,152,0.08),
+            0 18px 42px rgba(0,87,152,0.11),
+            inset 0 1px 0 rgba(255,255,255,0.94) !important;
+}
+
+/* Checks weniger nach Box */
+.contact-check {
+    border: 0 !important;
+    border-radius: 22px !important;
+    background: rgba(255,255,255,0.48) !important;
+    box-shadow: 0 12px 30px rgba(8,36,66,0.045) !important;
+}
+
+.contact-submit,
+.contact-calendar-btn {
+    border-radius: 999px !important;
+    min-height: 56px !important;
+}
+
+.contact-submit {
+    background: linear-gradient(135deg, #005798 0%, #1e78b7 58%, #67bfff 130%) !important;
+}
+
+@media (max-width: 1060px) {
+    .contact-shell {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-form-card {
+        position: relative !important;
+        top: auto !important;
+        max-width: 820px !important;
+        justify-self: center !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-page {
+        padding-top: 128px !important;
+    }
+
+    .contact-form-card {
+        padding: 22px 16px !important;
+        border-radius: 28px !important;
+    }
+
+    .contact-field-row,
+    .contact-field-row--small-second,
+    .contact-date-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-input,
+    .contact-field input,
+    .contact-field select {
+        border-radius: 18px !important;
+    }
+}
+
+/* =========================================================
+   CONTACT METALLIC COMPLETED INPUT UPDATE
+   - Beim Tippen/Fokus bleibt die Schrift schwarz und das Feld hell/weiß
+   - Nach Blur/Wechsel wird Text blau
+   - Nach Blur/Wechsel wird das komplette Feld metallic hellblau
+   GANZ UNTEN IN Contact.css lassen
+========================================================= */
+
+/* Grundzustand der Kontaktfelder */
+.contact-input,
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+    color: #101923 !important;
+    caret-color: #101923 !important;
+    border-color: rgba(0, 87, 152, 0.20) !important;
+    background:
+            linear-gradient(135deg,
+            rgba(255, 255, 255, 0.92) 0%,
+            rgba(246, 251, 255, 0.78) 100%
+            ) !important;
+    box-shadow:
+            0 16px 38px rgba(8, 36, 66, 0.065),
+            inset 0 1px 0 rgba(255, 255, 255, 0.90) !important;
+}
+
+/* Schreibmodus: sobald das Feld aktiv ist, immer schwarz/weiß */
+.contact-input:focus,
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus,
+.contact-input.contact-input--completed:focus,
+.contact-field input.contact-input--completed:focus,
+.contact-field select.contact-input--completed:focus,
+.contact-field textarea.contact-input--completed:focus {
+    color: #101923 !important;
+    caret-color: #101923 !important;
+    border-color: rgba(0, 87, 152, 0.68) !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow:
+            0 0 0 5px rgba(0, 87, 152, 0.11),
+            0 18px 42px rgba(0, 87, 152, 0.13),
+            inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+    text-shadow: none !important;
+    outline: none !important;
+}
+
+/* Abgeschlossener Zustand: metallic hellblau */
+.contact-input--completed:not(:focus),
+.contact-field input.contact-input--completed:not(:focus),
+.contact-field select.contact-input--completed:not(:focus),
+.contact-field textarea.contact-input--completed:not(:focus) {
+    color: var(--contact-blue, #005798) !important;
+    caret-color: var(--contact-blue, #005798) !important;
+    font-weight: 950 !important;
+    border-color: rgba(0, 106, 185, 0.62) !important;
+    background:
+            linear-gradient(135deg,
+            rgba(255, 255, 255, 0.96) 0%,
+            rgba(221, 246, 255, 0.96) 18%,
+            rgba(178, 226, 248, 0.98) 44%,
+            rgba(237, 251, 255, 0.98) 62%,
+            rgba(159, 216, 244, 0.95) 100%
+            ) !important;
+    box-shadow:
+            0 0 0 4px rgba(0, 106, 185, 0.09),
+            0 18px 42px rgba(0, 87, 152, 0.14),
+            inset 0 1px 0 rgba(255, 255, 255, 0.96),
+            inset 0 -10px 20px rgba(0, 87, 152, 0.055) !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Placeholder im abgeschlossenen Zustand ebenfalls leicht blau */
+.contact-input--completed:not(:focus)::placeholder,
+.contact-field input.contact-input--completed:not(:focus)::placeholder,
+.contact-field textarea.contact-input--completed:not(:focus)::placeholder {
+    color: var(--contact-blue, #005798) !important;
+    opacity: 0.82 !important;
+}
+
+/* Textauswahl im Metallic-Feld */
+.contact-input--completed:not(:focus)::selection,
+.contact-field input.contact-input--completed:not(:focus)::selection,
+.contact-field textarea.contact-input--completed:not(:focus)::selection {
+    background: rgba(0, 87, 152, 0.20) !important;
+    color: #003f70 !important;
+}
+
+/* Textarea bekommt denselben Metallic-Look, aber bleibt als größere Fläche lesbar */
+.contact-field textarea.contact-input--completed:not(:focus) {
+    background:
+            linear-gradient(135deg,
+            rgba(255, 255, 255, 0.96) 0%,
+            rgba(225, 247, 255, 0.96) 20%,
+            rgba(189, 232, 251, 0.98) 48%,
+            rgba(239, 252, 255, 0.98) 66%,
+            rgba(169, 221, 247, 0.95) 100%
+            ) !important;
+}

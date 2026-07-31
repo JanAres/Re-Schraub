@@ -1,0 +1,14 @@
+# /api/.htaccess
+<Files "rapidmail-config.php">
+    Require all denied
+</Files>
+
+<Files "rapidmail-config.example.php">
+    Require all denied
+</Files>
+
+<IfModule mod_headers.c>
+    <Files "newsletter.php">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    </Files>
+</IfModule>

@@ -1,86 +1,75 @@
-// src/pages/Impressum.jsx
 import React, { useContext } from "react";
 import "../location.css";
 import { Language } from "../context/LanguageContext";
+import PageFlyTitle from "../components/PageFlyTitle";
+
+const downloads = [
+    {
+        title: "Terrassofix/Fassadofix",
+        subtitle:
+            "Technische Informationen für Terrasse, Fassade und sichere Befestigungssysteme im Außenbereich.",
+        image: "/img/Screenshot 2025-06-05 at 09-27-15 EH_ReSchraub_2025_L.pdf.png",
+        href: "/pdf/EH_ReSchraub_2025_L.pdf",
+        meta: "Spezialkatalog",
+    },
+    {
+        title: "RE-Schraub Katalog",
+        subtitle:
+            "Der Produktkatalog 2025 als Grundlage für Auswahl, Planung und Einkauf.",
+        image: "/img/Screenshot 2025-06-05 at 12-07-24 RE-Schraub Katalog ohne Preise.pdf.png",
+        href: "/pdf/Katalog_ReSchraub_2025_FINAL_oPreise_HiRes.pdf",
+        meta: "Produktkatalog",
+    },
+];
 
 function Impressum() {
     const { t } = useContext(Language);
+    const pageTitle = t("download.title") || "Downloads";
 
     return (
-        <>
-            {/* Großes Banner am Seitenanfang */}
-            <div className="full-width-banner"></div>
+        <main className="downloads-page" aria-labelledby="downloads-title">
+            <PageFlyTitle path="/impressum" title={pageTitle} />
 
-            <div className="home-container">
-                {/* Sticky-Header oberhalb der Text-Box */}
-                <div className="impressum-header">{t("impressum.title")}</div>
+            <section className="downloads-hero">
+                <h1 id="downloads-title">{pageTitle}</h1>
+            </section>
 
-                {/* Große Text-Box mit den restlichen Inhalten */}
-                <div className="text-box">
-                    <h3>{t("impressum.company")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.companyInfo")}
-                    </p>
+            <section className="download-card-grid" aria-label="Download-Kataloge">
+                {downloads.map((item) => (
+                    <article className="download-card" key={item.title}>
+                        <a
+                            className="download-preview"
+                            href={item.href}
+                            download
+                            aria-label={`${item.title} herunterladen`}
+                        >
+                            <img
+                                src={item.image}
+                                alt={`${item.title} Vorschau`}
+                                loading="lazy"
+                            />
+                            <span className="download-corner-badge">PDF</span>
+                        </a>
 
-                    <h3>{t("impressum.businessData")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.businessDetails")}
-                    </p>
+                        <div className="download-card-body">
+                            <span className="download-meta">{item.meta}</span>
 
-                    <h3>{t("impressum.responsible")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.responsibleDetails")}
-                    </p>
+                            <h2>{item.title}</h2>
 
-                    <h3>{t("impressum.revoke")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.revokeText")}
-                    </p>
+                            <p>{item.subtitle}</p>
 
-                    <h3>{t("impressum.complaint")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.complaintText")}
-                    </p>
+                            <a href={item.href} download className="download-button">
+                                <span>PDF herunterladen</span>
 
-                    <h3>{t("impressum.portability")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.portabilityText")}
-                    </p>
-
-                    <h3>{t("impressum.rights")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.rightsText")}
-                    </p>
-
-                    <h3>{t("impressum.encryption")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.encryptionText")}
-                    </p>
-
-                    <h3>{t("impressum.serverLog")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.serverLogText")}
-                    </p>
-
-                    <h3>{t("impressum.contactForm")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.contactFormText")}
-                    </p>
-
-                    <h3>{t("impressum.newsletter")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.newsletterText")}
-                    </p>
-
-                    <h3>{t("impressum.cookies")}</h3>
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {t("impressum.cookiesText")}
-                    </p>
-
-                    <p>{t("impressum.source")}</p>
-                </div>
-            </div>
-        </>
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 3v11.2m0 0 4.4-4.4M12 14.2 7.6 9.8M5 20h14" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                ))}
+            </section>
+        </main>
     );
 }
 

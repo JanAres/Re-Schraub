@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+
+
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -8,6 +10,7 @@ export default defineConfig({
     strictPort: true, // Prevents auto-changing ports
     host: "localhost", // Ensures it binds correctly
   },
+  assetsInclude: ["**/*.xlsx"],
   build: {
     rollupOptions: {
       output: {

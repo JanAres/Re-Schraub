@@ -1,17 +1,19 @@
+/* src/index.css */
 
+/* Basis-Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
 }
 
-
-
+/* Allgemeines Home-Container-Layout (falls verwendet) */
 .home-container {
   display: flex;
   justify-content: center;
@@ -21,14 +23,148 @@ html, body {
   min-height: 100vh;
   background-color: #ffffff;
   padding: 20px;
-
 }
 
-
+/* Hover-Effekt für .box (global) */
 .box:hover {
   transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  /* Navbar: full viewport width, no rounded corners */
+  .navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: 12px;
+  }
+  .nav-list {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  /* Page sections: each full‐width & vertical */
+  .about, .products, .news, .contact, .impressum {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  /* Footer: stack columns */
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left, .footer-right {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Responsives Verhalten (global, so weit nötig)
+───────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────
+   FINAL MOBILE OVERRIDES (must be LAST in the file)
+   — forces wrap‐friendly text & a 2×2 grid of images
+───────────────────────────────────────────────────────────────────*/
+@media (max-width: 768px) {
+  /* stack container vertically */
+  .home-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 10px !important;
+  }
+
+  /* text box: full width & real paragraphs */
+  .home-container .textt-box {
+    width: 100% !important;
+    max-width: none !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    margin: 1rem 0 !important;
+    padding: 12px !important;
+    text-align: left !important;
+  }
+
+  /* force your two <p> elements to be blocks */
+  .textt-box p,
+  .textt-box .Subtitle2 {
+    display: block !important;
+    margin-bottom: 0.75em !important;
+  }
+
+  /* 2×2 image grid */
+  .wood-box-container {
+    width: 100% !important;
+    background: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+  .box-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-rows: auto !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0.5rem 0 !important;
+  }
+  .box {
+    width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+  .box-img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+  }
+
+  /* heading back in flow */
+  .head-row {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 1rem auto !important;
+    font-size: 22px !important;
+    padding: 8px !important;
+  }
 }
 
 
+@media (max-width: 480px) {
+  .home-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 
 
+/* Make the page a column flex, full viewport height */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Let main grow to fill available space */
+.app-main {
+  flex: 1;
+}

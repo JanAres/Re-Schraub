@@ -1,0 +1,17 @@
+<IfModule mod_mime.c>
+    AddType text/javascript .mjs
+    AddType text/javascript .js
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Vorhandene Dateien und Verzeichnisse normal ausliefern.
+    # Dadurch bleibt /api unangetastet.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # React/Vite-Routen
+    RewriteRule ^ index.html [L]
+</IfModule>
