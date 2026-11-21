@@ -1,0 +1,113 @@
+/* A shallow engraved word becomes raised relief; the link hit area stays fixed. */
+#root .navbar .nav-list li > a {
+    --nav-relief-face: #005798;
+    --nav-relief-side: #06436f;
+    --nav-relief-deep: #04304f;
+    --nav-relief-shadow: rgba(3, 33, 54, .24);
+    color: var(--nav-relief-face);
+    text-shadow: none;
+}
+
+/* Retire the old glowing click flash, which otherwise paints over the relief. */
+#root .navbar .nav-list li > a.nav-link-flash {
+    animation: none;
+}
+
+#root .navbar .nav-list li > a .nav-build-word {
+    position: relative;
+    transform: perspective(700px) translate3d(0, 1px, -2px);
+    transform-origin: 50% 70%;
+    color: inherit;
+    text-shadow:
+        0 -1px 1px rgba(0, 30, 52, .46),
+        .5px -.5px 0 rgba(0, 30, 52, .18),
+        0 1px 0 rgba(255, 255, 255, .98),
+        0 2px 1px rgba(255, 255, 255, .66);
+    transition:
+        transform 220ms cubic-bezier(.2, .75, .25, 1),
+        text-shadow 220ms ease,
+        color 180ms ease;
+}
+
+/* The letter reveal keeps its own opacity/transform; depth belongs to the word. */
+#root .navbar .nav-list li > a .nav-build-letter {
+    color: inherit;
+    text-shadow: inherit;
+}
+
+#root .navbar .nav-list li > a:is(.active, [aria-current="page"]) {
+    --nav-relief-face: #17232c;
+    --nav-relief-side: #101a22;
+    --nav-relief-deep: #0a1118;
+    --nav-relief-shadow: rgba(5, 17, 27, .28);
+}
+
+#root .navbar .nav-list li > a:is(.active, [aria-current="page"], :focus-visible) .nav-build-word {
+    transform: perspective(700px) translate3d(0, -2px, 7px) rotateX(5deg);
+    text-shadow:
+        0 -.6px 0 rgba(255, 255, 255, .44),
+        0 1px 0 var(--nav-relief-side),
+        0 2px 0 var(--nav-relief-side),
+        0 3px 0 var(--nav-relief-deep),
+        0 5px 4px var(--nav-relief-shadow),
+        0 9px 12px rgba(3, 33, 54, .12);
+}
+
+#root .navbar .nav-list li > a:focus-visible {
+    outline: 2px solid #005798;
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #root .navbar .nav-list li > a:hover:not(.active):not([aria-current="page"]) {
+        --nav-relief-face: #0069ad;
+    }
+
+    #root .navbar .nav-list li > a:hover .nav-build-word {
+        transform: perspective(700px) translate3d(0, -2px, 7px) rotateX(5deg);
+        text-shadow:
+            0 -.6px 0 rgba(255, 255, 255, .44),
+            0 1px 0 var(--nav-relief-side),
+            0 2px 0 var(--nav-relief-side),
+            0 3px 0 var(--nav-relief-deep),
+            0 5px 4px var(--nav-relief-shadow),
+            0 9px 12px rgba(3, 33, 54, .12);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #root .navbar .nav-list li > a,
+    #root .navbar .nav-list li > a .nav-build-word {
+        transition: none;
+    }
+
+    #root .navbar .nav-list li > a .nav-build-word,
+    #root .navbar .nav-list li > a:is(.active, [aria-current="page"], :focus-visible, :hover) .nav-build-word {
+        transform: none;
+    }
+}
+
+@media (forced-colors: active) {
+    #root .navbar .nav-list li > a,
+    #root .navbar .nav-list li > a:is(.active, [aria-current="page"], :hover) {
+        color: LinkText;
+    }
+
+    #root .navbar .nav-list li > a .nav-build-word,
+    #root .navbar .nav-list li > a:is(.active, [aria-current="page"], :focus-visible, :hover) .nav-build-word {
+        transform: none;
+        text-shadow: none;
+    }
+
+    #root .navbar .nav-list li > a:is(.active, [aria-current="page"]) {
+        text-decoration: underline;
+        text-underline-offset: .2em;
+    }
+
+    #root .navbar .nav-list li > a:focus-visible {
+        outline-color: Highlight;
+    }
+}
+
+#root .navbar .nav-list li > a { transform: none; }

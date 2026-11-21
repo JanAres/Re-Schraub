@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Language } from "../context/LanguageContext";
 import "../Navbar.css";
 import logo from "../img/RE-Schraub Logo frei-1772x1128-429w.png";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { flyTitleAndNavigate } from "../utils/pageTitleMotion";
 
 
@@ -18,8 +18,11 @@ function Navbar({ animateBuild = false }) {
     const FLASH_NAV_ROUTES = ["/products", "/impressum"];
 
     const navigate = useNavigate();
+    const { pathname } = useLocation();
+    const aboutHref = animateBuild ? pathname : "/about-us";
 
     const handleFlyNav = (event, to) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
         setMenuOpen(false);
         flyTitleAndNavigate(to, navigate);
@@ -46,13 +49,13 @@ function Navbar({ animateBuild = false }) {
 
     const navItems = useMemo(
         () => [
-            { to: "/about-us", label: t("nav.about") },
+            { to: aboutHref, label: t("nav.about") },
             { to: "/products", label: t("nav.products") },
             { to: "/newsletter", label: t("nav.newsletter") },
             { to: "/contact", label: t("nav.contact") },
             { to: "/impressum", label: t("nav.stock") },
         ],
-        [t]
+        [t, aboutHref]
     );
 
 
@@ -101,6 +104,21 @@ function Navbar({ animateBuild = false }) {
                 buildDone ? "is-built" : ""
             }`}
         >
+            {animateBuild && (
+                <NavLink
+                    to="/about-us"
+                    className="navbar-hero-brand"
+                    aria-label="RE-Schraub – zurück zum Anfang"
+                    onClick={(event) => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                        event.preventDefault();
+                        setMenuOpen(false);
+                        window.dispatchEvent(new Event("re-brand-reset"));
+                    }}
+                >
+                    <span className="navbar-hero-brand__text">RE-Schraub</span>
+                </NavLink>
+            )}
             <div className="navbar-build-line" aria-hidden="true" />
             {!buildDone && (
                 <div className="navbar-build-screw" aria-hidden="true">
@@ -109,16 +127,19 @@ function Navbar({ animateBuild = false }) {
             )}
 
             <button
+                type="button"
                 className="navbar-toggle"
                 onClick={toggleMenu}
-                aria-label="Toggle menu"
+                aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+                aria-expanded={menuOpen}
+                aria-controls="main-navigation"
             >
                 ☰
             </button>
 
 
 
-            <ul className={menuOpen ? "nav-list is-active" : "nav-list"}>
+            <ul id="main-navigation" className={menuOpen ? "nav-list is-active" : "nav-list"}>
                 {navItems.map((item, itemIndex) => {
                     const visibleCount =
                         visibleLettersByItem[itemIndex] ?? item.label.length;
@@ -142,7 +163,7 @@ function Navbar({ animateBuild = false }) {
                                             key={`${item.to}-${charIndex}-${char}`}
                                             className={`nav-build-letter ${
                                                 visibleCount > charIndex ? "is-visible" : ""
-                                            }`}
+                                            } ${char === " " ? "is-space" : ""}`}
                                         >
                                             {char}
                                         </span>

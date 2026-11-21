@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import useIsMobile from "../components/useIsMobile";
+import useHeroBrandDock from "../hooks/useHeroBrandDock";
 import AnimatedLineIcon from "../components/AnimatedLineIcon";
 import "../AboutUs.css";
 
@@ -158,10 +159,23 @@ function AnimatedStoryText({ text = "", delay = 0 }) {
     );
 }
 
-function AboutUs() {
+function AboutUs({ footer = null, companyCard = null }) {
     const location = useLocation();
     const experienceRef = useRef(null);
     const storyRef = useRef(null);
+    const brandRef = useRef(null);
+    const isMobile = useIsMobile(900);
+    const [reducedMotion, setReducedMotion] = useState(() =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+    const { dockBrand } = useHeroBrandDock({ experienceRef, brandRef, isMobile, reducedMotion });
+
+    useEffect(() => {
+        const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const update = () => setReducedMotion(query.matches);
+        query.addEventListener("change", update);
+        return () => query.removeEventListener("change", update);
+    }, []);
 
     const brand = useMemo(() => Array.from("RE-Schraub"), []);
 
@@ -443,20 +457,14 @@ function AboutUs() {
         };
 
         const checkStoryVisibility = () => {
-            const containerTop = rootNode.scrollTop;
-            const containerHeight = rootNode.clientHeight;
+            const rootRect = rootNode.getBoundingClientRect();
+            const storyRect = storyNode.getBoundingClientRect();
+            const containerTop = isMobile ? 56 : rootRect.top;
+            const containerBottom = isMobile ? window.innerHeight : rootRect.bottom;
+            const visiblePx = Math.min(containerBottom, storyRect.bottom) - Math.max(containerTop, storyRect.top);
+            const visibleRatio = Math.max(0, visiblePx) / Math.max(1, Math.min(storyRect.height, containerBottom - containerTop));
 
-            const storyTop = storyNode.offsetTop;
-            const storyHeight = storyNode.offsetHeight;
-            const storyBottom = storyTop + storyHeight;
-
-            const visiblePx =
-                Math.min(containerTop + containerHeight, storyBottom) -
-                Math.max(containerTop, storyTop);
-
-            const visibleRatio = Math.max(0, visiblePx) / storyHeight;
-
-            const currentScrollTop = rootNode.scrollTop;
+            const currentScrollTop = isMobile ? window.scrollY : rootNode.scrollTop;
             const direction = currentScrollTop >= lastScrollTopRef.current ? "next" : "prev";
             lastScrollTopRef.current = currentScrollTop;
 
@@ -469,31 +477,35 @@ function AboutUs() {
 
         checkStoryVisibility();
 
-        rootNode.addEventListener("scroll", checkStoryVisibility, { passive: true });
+        const scroller = isMobile ? window : rootNode;
+        scroller.addEventListener("scroll", checkStoryVisibility, { passive: true });
         window.addEventListener("resize", checkStoryVisibility);
 
         return () => {
-            rootNode.removeEventListener("scroll", checkStoryVisibility);
+            scroller.removeEventListener("scroll", checkStoryVisibility);
             window.removeEventListener("resize", checkStoryVisibility);
             timers.forEach(clearTimeout);
+            clearStoryTitleTimers();
         };
-    }, []);
+    }, [isMobile]);
 
     const scrollToStory = () => {
+        if (dockBrand()) return;
         const rootNode = experienceRef.current;
         const storyNode = storyRef.current;
 
         if (!rootNode || !storyNode) return;
 
-        rootNode.scrollTo({
-            top: storyNode.offsetTop,
-            behavior: "smooth",
-        });
+        if (isMobile) {
+            const navbarHeight = document.querySelector(".navbar")?.getBoundingClientRect().height || 56;
+            window.scrollTo({ top: storyNode.getBoundingClientRect().top + window.scrollY - navbarHeight, behavior: reducedMotion ? "auto" : "smooth" });
+        } else {
+            rootNode.scrollTo({ top: storyNode.getBoundingClientRect().top - rootNode.getBoundingClientRect().top + rootNode.scrollTop, behavior: reducedMotion ? "auto" : "smooth" });
+        }
     };
 
     return (
         <div ref={experienceRef} className="about-experience">
-            <Navbar animateBuild={true} />
 
             <section className="about-screen hero-screen">
                 <div className="hero-center">
@@ -502,6 +514,7 @@ function AboutUs() {
                     </div>
 
                     <h1
+                        ref={brandRef}
                         className={`hero-brand ${brandGlow ? "is-glow" : ""} ${
                             brandBlue ? "is-blue" : ""
                         }`}
@@ -555,7 +568,7 @@ function AboutUs() {
                             showScrollButton ? "is-visible" : ""
                         } ${chargeScrollButton ? "is-charged" : ""}`}
                         onClick={scrollToStory}
-                        aria-label="Zur zweiten Seite scrollen"
+                        aria-label="Titel verkleinern und anschließend weiterlesen"
                     >
                         <span className="scroll-circle">
                             <span className="scroll-arrow" />
@@ -622,6 +635,8 @@ function AboutUs() {
                     </div>
                 </div>
             </section>
+            {companyCard}
+            {footer}
         </div>
     );
 }

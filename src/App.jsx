@@ -15,23 +15,23 @@ import Impressum from "./pages/Impressum";
 import Footer from "./pages/Footer";
 
 function AppContent() {
-    const isMobile = useIsMobile(768);
+    const isMobile = useIsMobile(900);
     const location = useLocation();
 
     const isAboutPage =
         location.pathname === "/" || location.pathname === "/about-us";
 
     return (
-        <div className="app-container">
+        <div className={`app-container${isAboutPage ? " app-container--about" : ""}`}>
             <Navbar animateBuild={isAboutPage} />
             <ScrollToTop />
 
-            {!isMobile && <Info />}
+            {!isMobile && !isAboutPage && <Info />}
 
             <main className="app-main">
                 <Routes>
-                    <Route path="/" element={<AboutUs />} />
-                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/" element={<AboutUs footer={<Footer />} companyCard={!isMobile ? <Info /> : null} />} />
+                    <Route path="/about-us" element={<AboutUs footer={<Footer />} companyCard={!isMobile ? <Info /> : null} />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/news" element={<News />} />
                     <Route path="/contact" element={<Contact />} />
@@ -40,7 +40,7 @@ function AppContent() {
                 </Routes>
             </main>
 
-            <Footer />
+            {!isAboutPage && <Footer />}
         </div>
     );
 }

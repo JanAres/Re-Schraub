@@ -1,0 +1,173 @@
+/* The about intro consumes one gesture before the content begins to scroll. */
+#root .app-container--about .navbar-mobile-brand { display: none; }
+
+#root .app-container--about .navbar-hero-brand {
+    display: inline-flex;
+    align-items: center;
+    color: #005798;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: "Inter", "Segoe UI", "Arial Narrow", Arial, sans-serif;
+    font-size: clamp(22px, 1.8vw, 30px);
+    font-weight: 900;
+    letter-spacing: .01em;
+    line-height: .94;
+    font-kerning: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.navbar-hero-brand__text { display: inline-block; }
+#root .app-container--about .navbar[data-brand-dock-state="docked"] .navbar-hero-brand {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#root .app-container--about .navbar-hero-brand:focus-visible {
+    outline: 2px solid #005798;
+    outline-offset: 6px;
+}
+
+#root .about-experience { scroll-snap-type: none !important; scroll-behavior: auto !important; }
+#root .about-experience .about-screen { scroll-snap-align: none !important; }
+#root .about-experience .hero-screen .hero-center {
+    transform: translateY(calc(-1 * clamp(28px, 6vh, 64px))) !important;
+}
+#root .about-experience .hero-screen .hero-brand {
+    width: max-content;
+    font-kerning: none;
+    font-weight: 900 !important;
+    letter-spacing: .01em !important;
+    line-height: .94 !important;
+}
+#root .about-experience[data-brand-dock-state="docking"] .hero-brand,
+#root .about-experience[data-brand-dock-state="docked"] .hero-brand,
+#root .about-experience[data-brand-dock-state="undocking"] .hero-brand {
+    opacity: 0 !important;
+}
+#root .about-experience[data-brand-dock-started="true"] .hero-brand .hero-letter {
+    opacity: 1 !important;
+    transform: none !important;
+    color: #005798 !important;
+}
+
+.re-brand-flight {
+    position: fixed !important;
+    z-index: 100000;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    display: block;
+    color: #005798;
+    white-space: nowrap;
+    font-kerning: none;
+    text-shadow: none;
+    text-align: left;
+    transform-origin: 0 0;
+    pointer-events: none;
+    will-change: transform;
+}
+
+@media (min-width: 901px) {
+    #root .app-container--about { height: 100dvh; overflow: hidden; }
+    #root .app-container--about > .navbar { flex: 0 0 auto; }
+    #root .app-container--about > .app-main { flex: 1 1 auto; min-height: 0; }
+    #root .app-container--about .about-experience {
+        height: 100% !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+        overscroll-behavior-y: contain;
+    }
+    #root .app-container--about .about-experience .hero-screen {
+        height: 100% !important;
+        min-height: 100% !important;
+    }
+    #root .app-container--about .navbar-hero-brand {
+        position: absolute;
+        left: clamp(20px, 2vw, 40px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    #root .app-container--about .navbar .nav-list {
+        width: 100% !important;
+        padding-left: clamp(156px, 14vw, 230px) !important;
+        gap: clamp(12px, 3vw, 64px) !important;
+        justify-content: center !important;
+    }
+    #root .app-container--about .navbar .nav-list a {
+        font-size: clamp(18px, 2.05vw, 31px) !important;
+        padding-inline: clamp(5px, .75vw, 12px) !important;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 900px) {
+    #root .app-container--about .navbar-hero-brand { min-height: 44px; font-size: 22px; }
+    #root .about-experience .hero-screen .hero-center {
+        transform: translateY(-20px) !important;
+    }
+}
+
+/* The release branch also provides the About layout prerequisites directly. */
+@media (max-width: 900px) {
+    #root .app-container--about { height: auto; min-height: 100svh; overflow: visible; }
+    #root .app-container--about > .app-main { min-width: 0; min-height: 0; overflow: visible; }
+    #root .app-container--about > .navbar {
+        position: sticky !important;
+        top: 0;
+        z-index: 9000;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 56px;
+        flex: 0 0 auto;
+        padding: 4px max(12px, env(safe-area-inset-right)) 4px max(12px, env(safe-area-inset-left));
+        overflow: visible;
+        background: #fff;
+        border-bottom: 2px solid #005798;
+    }
+    #root .app-container--about .navbar-build-line,
+    #root .app-container--about .navbar-build-screw { display: none; }
+    #root .app-container--about .navbar-toggle {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: transparent;
+        color: #005798;
+        font-size: 27px;
+    }
+    #root .app-container--about .navbar .nav-list {
+        display: none;
+        position: absolute;
+        inset: 100% 0 auto;
+        width: 100%;
+        max-height: calc(100svh - 58px);
+        height: auto;
+        padding: 8px 16px 16px;
+        margin: 0;
+        gap: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: #fff;
+        box-shadow: 0 8px 12px rgb(15 23 32 / 8%);
+        transition: none;
+    }
+    #root .app-container--about .navbar .nav-list.is-active { display: flex; flex-direction: column; }
+    #root .app-container--about .navbar .nav-list li { width: 100%; }
+    #root .app-container--about .navbar .nav-list a { min-height: 48px; padding: 8px 12px; font-size: 21px; }
+    #root .app-container--about .navbar .nav-build-letter { opacity: 1; transform: none; }
+    #root .app-container--about .about-experience { height: auto !important; min-height: 0 !important; overflow: visible !important; }
+    #root .app-container--about .hero-screen { height: auto !important; min-height: calc(100svh - 56px) !important; padding: 32px 16px 96px; }
+    #root .app-container--about .hero-center { height: auto; min-height: 0; padding: 0; width: 100%; }
+    #root .app-container--about .hero-brand { font-size: clamp(44px, 13vw, 90px); }
+    #root .app-container--about .hero-falling-screw { display: none; }
+    #root .app-container--about .story-screen { height: auto; min-height: 100svh; overflow: visible; }
+}
+
+/* Keep spaces visible inside the existing per-letter flex animation. */
+#root .navbar .nav-build-letter.is-space { width: .3em; white-space: pre; }
